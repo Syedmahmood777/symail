@@ -1,0 +1,56 @@
+// typography.scss
+
+// Utility classes for applying Material Design 3 system typography styles
+
+.headline-large {
+  font: var(--mat-sys-headline-large);
+}
+
+.headline-medium {
+  font: var(--mat-sys-headline-medium);
+}
+
+.headline-small {
+  font: var(--mat-sys-headline-small);
+}
+
+.title-large {
+  font: var(--mat-sys-title-large);
+}
+
+.title-medium {
+  font: var(--mat-sys-title-medium);
+}
+
+.title-small {
+  font: var(--mat-sys-title-small);
+}
+
+.body-large {
+  font: var(--mat-sys-body-large);
+}
+
+.body-medium {
+  font: var(--mat-sys-body-medium);
+}
+
+.body-small {
+  font: var(--mat-sys-body-small);
+}
+
+.label-large {
+  font: var(--mat-sys-label-large);
+}
+
+.label-medium {
+  font: var(--mat-sys-label-medium);
+}
+
+.label-small {
+  font: var(--mat-sys-label-small);
+}
+
+// Optional base override for all text
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+}

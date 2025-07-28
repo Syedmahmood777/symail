@@ -1,0 +1,40 @@
+
+
+.mat-sidenav{
+    width: auto;
+    height:100vh;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 1rem;
+
+}
+
+mat-sidenav-container{
+    min-height: 500px;
+}
+
+header{
+    margin: 1rem ;
+    padding: 0 1rem;
+    width: 95%;
+
+    span{
+         font: var(--mat-sys-headline-large);
+    }
+
+    mat-toolbar{
+        display: flex;
+        justify-content: space-between;
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+    }
+    li{
+      margin:0 0.5rem;
+    }
+}
+
+
+

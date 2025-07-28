@@ -1,0 +1,20 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" [opened]="true" class="auto-sidenav">
+    <ul>
+        <li>Compose</li>
+        <li>Inbox</li>
+        <li>Sent</li>
+        <li>Draft</li>
+        <li>Starred</li>
+        <li>Spam</li>
+        <li>Trash</li>
+    </ul>
+  </mat-sidenav>
+  <mat-sidenav position="end">End</mat-sidenav>
+
+<mat-sidenav-content>    
+ <router-outlet /> 
+</mat-sidenav-content>
+
+
+</mat-sidenav-container>
