@@ -21,12 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./SyMail
+        working-directory: ./sy-mail
 
       - name: Build Angular app
         run: npm run build
-        working-directory: ./SyMail
+        working-directory: ./sy-mail
 
       - name: Run tests
         run: npm run test -- --watch=false --no-progress --browsers=ChromeHeadless
-        working-directory: ./SyMail
+        working-directory: ./sy-mail
