@@ -9,5 +9,5 @@ import { Header } from './components/header/header';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('sy-mail');
+  protected readonly title = signal('symail');
 }
