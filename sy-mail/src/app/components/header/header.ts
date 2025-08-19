@@ -3,9 +3,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-header',
-  imports: [RouterModule,MatListModule,MatIconModule,MatToolbarModule],
+  imports: [RouterModule,MatListModule,MatIconModule,MatToolbarModule, MatButtonModule],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
