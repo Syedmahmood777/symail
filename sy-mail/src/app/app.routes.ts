@@ -7,5 +7,25 @@ export const routes: Routes = [
         loadComponent:()=>{
             return import("./components/home/home").then((m)=>m.Home)
         }
+    },
+    {
+        path:"auth",
+        children:[
+            {
+            path:"login",
+            loadComponent:()=>{
+                return import("./components/auth/login/login").then((m)=>m.Login)
+            }
+        },
+        {
+            path:"signup",
+            loadComponent:()=>{
+                return import("./components/auth/signup/signup").then((m)=>m.Signup)
+            }
+        }
+    
+    ]
     }
+
+
 ];
