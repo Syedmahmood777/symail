@@ -142,6 +142,7 @@
 .workflow-box {
   position: relative;
   width: 18rem;
+  height: fit-content;
   background: rgba(255,255,255,0.15);
   padding: 2rem;
   border-radius: 1rem;
@@ -277,25 +278,57 @@
 //         overflow: auto;
 //     }
     
-//     .title {
-//         font-size: 2rem;
-//         text-align: center;
-//         margin-bottom: 40px;
-//     }
+    .title {
+        padding: 1rem 2rem;
+    }
     
-//     .workflow-box {
-//         position: relative !important;
-//         width: 100%;
-//         margin-bottom: 30px;
-//         top: auto !important;
-//         left: auto !important;
-//         right: auto !important;
-//     }
-    
-//     #connection-svg {
-//         display: none;
-//     }
-// }
+
+
+
+.about {
+
+  font: 'Inter', sans-serif;
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #D93025; // headline pops in the strong red
+    letter-spacing: 1px;
+    padding:1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: regular;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: #333; // body stays clean and readable
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  // Accent border / highlight
+  border-top: 6px solid #E26944;
+ 
+.icon {
+  display: inline-block;
+    width: 1em;
+    height: 1em; // keep it square
+  }
+}
+
+
+
 
 
 

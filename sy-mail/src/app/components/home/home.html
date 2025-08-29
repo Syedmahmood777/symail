@@ -42,7 +42,8 @@
     
 
 </div>
-<div class="container-3">
+
+<div class="container-3" [@boxAnimation]>
     <div class="bg-shape"></div>
     <div class="bg-shape"></div>
     <div class="bg-shape"></div>
@@ -54,37 +55,58 @@
         <!-- SVG for dynamic connections -->
         <svg #connectionSvg id="connection-svg"></svg>
         
-        <!-- Workflow Boxes -->
+     <!-- Workflow Boxes -->
         <div class="workflow-box box1" id="box1" #box1>
-            <div class="step-number">1</div>
-            <h3>Signup/Login</h3>
-            <p>Users create an account or log in through Symail's secure authentication system. Account details are stored securely, ensuring encrypted credentials and user privacy from the start.</p>
+        <div class="step-number">1</div>
+        <h3>Signup / Login</h3>
+        <p>Create an account or log in with Symail’s secure authentication system. Your credentials are encrypted and stored safely, keeping your privacy intact from the very start.</p>
         </div>
-        
+
         <div class="workflow-box box2" id="box2" #box2>
-            <div class="step-number">2</div>
-            <h3>Email Composition</h3>
-            <p>Create and compose emails with Symail's intuitive interface. Features include rich text editing, attachment support, and smart templates to streamline your communication process.</p>
+        <div class="step-number">2</div>
+        <h3>Compose Emails</h3>
+        <p>Write emails effortlessly with Symail’s rich-text editor, attachment support, and reusable templates designed to make communication faster and smarter.</p>
         </div>
-        
+
         <div class="workflow-box box3" id="box3" #box3>
-            <div class="step-number">3</div>
-            <h3>Send & Manage</h3>
-            <p>Send emails instantly with advanced delivery tracking, scheduling options, and comprehensive inbox management. Organize conversations with smart filtering and search capabilities.</p>
+        <div class="step-number">3</div>
+        <h3>Send & Manage</h3>
+        <p>Deliver emails instantly or schedule them for later. Stay organized with advanced inbox management, filters, and powerful search tools.</p>
         </div>
+
         <div class="workflow-box box4" id="box4" #box4>
-            <div class="step-number">4</div>
-            <h3>Send & Manage</h3>
-            <p>Send emails instantly with advanced delivery tracking, scheduling options, and comprehensive inbox management. Organize conversations with smart filtering and search capabilities.</p>
+        <div class="step-number">4</div>
+        <h3>Receive Securely</h3>
+        <p>Incoming mail is handled by Dovecot, ensuring reliable delivery and seamless synchronization across all your devices.</p>
         </div>
+
         <div class="workflow-box box5" id="box5" #box5>
-            <div class="step-number">5</div>
-            <h3>Send & Manage</h3>
-            <p>Send emails instantly with advanced delivery tracking, scheduling options, and comprehensive inbox management. Organize conversations with smart filtering and search capabilities.</p>
+        <div class="step-number">5</div>
+        <h3>CI & CD</h3>
+        <p>Symail evolves without downtime. Powered by Kubernetes, every update is deployed seamlessly, ensuring continuous integration, smooth delivery, and reliable performance at scale.</p>
+
         </div>
+
 
 
 
     </div>
+
+</div>
+
+<div class="container-4">
+    <section class="about">
+         <h2><img src="assets/icon/mail.svg" class="icon"> About Symail</h2>
+<p>  Symail is a free, open-source email client built for people who value privacy and control over their communication. Designed with end-to-end encryption at its core, Symail keeps your conversations safe from prying eyes while offering a clean, modern interface that makes email simple again.
+</p>
+<p>
+Unlike mainstream providers, Symail doesn’t compromise your data for profit. Your messages are yours alone. Whether you’re sending personal notes or managing professional communication, Symail combines security with usability so you never have to trade convenience for privacy.
+</p>
+
+<p>
+    Backed by a transparent, community-driven development process, Symail is constantly improving with the help of open-source contributors. It is more than an email client; it is a statement that your digital privacy matters.
+</p>
+</section>
+  
 
 </div>
