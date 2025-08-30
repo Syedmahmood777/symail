@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OnInit } from '@angular/core';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
@@ -29,4 +30,13 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 
   ]
 })
-export class Home {}
+export class Home implements OnInit {
+  animateBoxes = false;
+   ngOnInit() {
+    // Trigger animation after a short delay
+    setTimeout(() => {
+      this.animateBoxes = true;
+      console.log('Animation triggered');
+    }, 100);
+  }
+}
