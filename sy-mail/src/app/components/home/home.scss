@@ -180,43 +180,12 @@
 
 .box6 { grid-column: 2; grid-row: 4; }
 
-#connection-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.connection-line {
-    stroke: rgba(255, 255, 255, 0.6);
-    stroke-width: 3;
-    fill: none;
-    stroke-linecap: round;
-    stroke-dasharray: 8, 5;
-    animation: dash 2s linear infinite;
-}
-
 @keyframes dash {
     to {
         stroke-dashoffset: -20;
     }
 }
 
-/* Animated gradient background shapes */
-.bg-shape {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  animation: float 20s ease-in-out infinite;
-}
-
-.bg-shape:nth-child(1) { width: 60px; height: 60px; top: 10%; left: 20%; animation-duration: 18s; animation-delay: 2s; }
-.bg-shape:nth-child(2) { width: 120px; height: 120px; top: 40%; right: 15%; animation-duration: 22s; animation-delay: 4s; }
-.bg-shape:nth-child(3) { width: 200px; height: 200px; bottom: 5%; left: 30%; animation-duration: 25s; animation-delay: 6s; }
-.bg-shape:nth-child(4) { width: 80px; height: 80px; top: 70%; right: 40%; animation-duration: 20s; animation-delay: 1s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px) translateX(0px); }
@@ -390,8 +359,6 @@
 }
 
 
-
-
 // Stats Counter
 .stats-counter {
             display: flex;
@@ -430,7 +397,6 @@
         }
 
 
-// Carousel Styles
 .container-5{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
             min-height: 100vh;
@@ -439,212 +405,3 @@
             justify-content: center;
             padding: 20px;
 }
-
-
- .carousel-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .carousel-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .carousel-header h1 {
-            color: white;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .carousel-header p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-        }
-
-        .carousel {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            height: 400px;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            height: 100%;
-        }
-
-        .tech-card {
-            min-width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(45deg, #1a1a2e, #16213e);
-            border-radius: 15px;
-            padding: 40px;
-            margin: 0 10px;
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tech-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .tech-card:hover::before {
-            left: 100%;
-        }
-
-        .tech-content {
-            z-index: 2;
-            position: relative;
-        }
-
-        .tech-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .tech-name {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #64ffda;
-        }
-
-        .tech-description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-
-        .tech-features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .feature-tag {
-            background: rgba(100, 255, 218, 0.2);
-            color: #64ffda;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(100, 255, 218, 0.3);
-        }
-
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .control-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .carousel-indicators {
-            display: flex;
-            gap: 10px;
-        }
-
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .indicator.active {
-            background: #64ffda;
-            transform: scale(1.2);
-        }
-
-        .auto-play-btn {
-            background: rgba(100, 255, 218, 0.2);
-            border: 1px solid rgba(100, 255, 218, 0.3);
-            color: #64ffda;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .auto-play-btn:hover {
-            background: rgba(100, 255, 218, 0.3);
-        }
-
-        .auto-play-btn.active {
-            background: #64ffda;
-            color: #1a1a2e;
-        }
-
-        @media (max-width: 768px) {
-            .carousel-container {
-                padding: 20px;
-            }
-            
-            .carousel-header h1 {
-                font-size: 2rem;
-            }
-            
-            .tech-card {
-                padding: 20px;
-            }
-            
-            .tech-icon {
-                font-size: 3rem;
-            }
-            
-            .tech-name {
-                font-size: 1.5rem;
-            }
-        }
-
-
-
-
-

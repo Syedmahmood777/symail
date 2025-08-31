@@ -1,0 +1,12 @@
+/* Animated gradient background shapes */
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  animation: float 20s ease-in-out infinite;
+}
+
+.bg-shape:nth-child(1) { width: 60px; height: 60px; top: 10%; left: 20%; animation-duration: 18s; animation-delay: 2s; }
+.bg-shape:nth-child(2) { width: 120px; height: 120px; top: 40%; right: 15%; animation-duration: 22s; animation-delay: 4s; }
+.bg-shape:nth-child(3) { width: 200px; height: 200px; bottom: 5%; left: 30%; animation-duration: 25s; animation-delay: 6s; }
+.bg-shape:nth-child(4) { width: 80px; height: 80px; top: 70%; right: 40%; animation-duration: 20s; animation-delay: 1s; }

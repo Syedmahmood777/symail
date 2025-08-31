@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
+import { Bgshapes } from '../bgshapes/bgshapes';
+import { Carousel } from '../carousel/carousel';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,Carousel,Bgshapes],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
   animations: [
@@ -36,7 +38,7 @@ export class Home implements OnInit {
     // Trigger animation after a short delay
     setTimeout(() => {
       this.animateBoxes = true;
-      console.log('Animation triggered');
+      
     }, 100);
   }
 }
