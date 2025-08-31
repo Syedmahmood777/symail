@@ -1,5 +1,5 @@
 <app-bgshapes></app-bgshapes>
-<div class="container-0">
+<div class="container-0" #container>
     <div class="parent">
         
         <div class="intro-text-container">
@@ -28,7 +28,7 @@
     </div>
         
 </div>
-<div class="container-2">
+<div class="container-2" #container>
     <div class="quote">
         <span>Don't ever make the mistake [of thinking] that you can design something better than what you get from ruthless massively parallel trial-and-error with a feedback cycle. That's giving your intelligence much too credit.</span>
     </div>
@@ -39,63 +39,56 @@
             <span> Github</span>
 
         </div>
-    </div>
-    
+    </div>    
 
 </div>
 
-@if (animateBoxes) {
-
-    <div class="container-3" [@boxAnimation]>
-        
+    <div class="container-3" #container>        
         
         <h1 class="title">Explore the workflow of Symail</h1>
-    <div class="container">
-        
-        <!-- SVG for dynamic connections -->
-        <svg #connectionSvg id="connection-svg"></svg>
-        
-     <!-- Workflow Boxes -->
-     <div class="workflow-box box1" id="box1" #box1>
+
+    <div class="container">        
+
+   
+     <div class="workflow-box box1" id="box1" #workflowBox>
          <div class="step-number">1</div>
          <h3>Signup / Login</h3>
          <p>Create an account or log in with Symail’s secure authentication system. Your credentials are encrypted and stored safely, keeping your privacy intact from the very start.</p>
         </div>
 
-        <div class="workflow-box box2" id="box2" #box2>
+        <div class="workflow-box box2" id="box2" #workflowBox>
         <div class="step-number">2</div>
         <h3>Compose Emails</h3>
         <p>Write emails effortlessly with Symail’s rich-text editor, attachment support, and reusable templates designed to make communication faster and smarter.</p>
     </div>
     
-        <div class="workflow-box box3" id="box3" #box3>
+        <div class="workflow-box box3" id="box3" #workflowBox>
         <div class="step-number">3</div>
         <h3>Send & Manage</h3>
         <p>Deliver emails instantly or schedule them for later. Stay organized with advanced inbox management, filters, and powerful search tools.</p>
     </div>
 
-        <div class="workflow-box box4" id="box4" #box4>
+        <div class="workflow-box box4" id="box4" #workflowBox>
         <div class="step-number">4</div>
         <h3>Receive Securely</h3>
         <p>Incoming mail is handled by Dovecot, ensuring reliable delivery and seamless synchronization across all your devices.</p>
     </div>
     
-    <div class="workflow-box box5" id="box5" #box5>
+    <div class="workflow-box box5" id="box5" #workflowBox>
         <div class="step-number">5</div>
         <h3>CI & CD</h3>
         <p>Symail evolves without downtime. Powered by Kubernetes, every update is deployed seamlessly, ensuring continuous integration, smooth delivery, and reliable performance at scale.</p>
         
-        </div>
-        
+        </div>        
         
         
         
     </div>
     
 </div>
-}
 
-<div class="container-4">
+
+<div class="container-4" #container>
     <section class="about">
         <div class="about-header">
             <div class="about-title">
@@ -151,6 +144,6 @@ Unlike mainstream providers, Symail doesn’t compromise your data for profit. Y
 
 </div>
 
-<div class="container-5">
+<div class="container-5" #container>
 <app-carousel></app-carousel>
 </div>
