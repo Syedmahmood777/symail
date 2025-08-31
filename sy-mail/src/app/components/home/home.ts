@@ -25,12 +25,9 @@ export class Home implements AfterViewInit {
     
     // Add a small delay to ensure DOM is fully rendered
     setTimeout(() => {
-      console.log('Boxes found:', this.boxes.length); // Debug      
-     console.log('Containers found:', this.containers.length); // Debug  
-      const observer = new IntersectionObserver(entries => {
+            const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            console.log('Animating box:', entry.target.id); // Debug
+          if (entry.isIntersecting) {            
             (entry.target as HTMLElement).classList.add('animate-in');
             observer.unobserve(entry.target);
           }
