@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';;
 import { Bgshapes } from '../bgshapes/bgshapes';
 import { Carousel } from '../carousel/carousel';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
@@ -32,13 +31,13 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 
   ]
 })
-export class Home implements OnInit {
+export class Home  {
   animateBoxes = false;
-   ngOnInit() {
-    // Trigger animation after a short delay
+   constructor(private cdr: ChangeDetectorRef) {}
+  ngAfterViewInit() {
+ 
     setTimeout(() => {
       this.animateBoxes = true;
-      
-    }, 100);
-  }
+      this.cdr.detectChanges(); // Trigger change detection
+    }, 100);}
 }
