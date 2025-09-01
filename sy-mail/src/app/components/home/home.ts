@@ -4,12 +4,13 @@ import { Bgshapes } from '../bgshapes/bgshapes';
 import { Carousel } from '../carousel/carousel';
 import { isPlatformBrowser } from '@angular/common';
 import { ViewChildren, QueryList } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Bgshapes, Carousel],
+  imports: [CommonModule, Bgshapes, Carousel,RouterLink],
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
 })
