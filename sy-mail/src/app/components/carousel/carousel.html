@@ -1,132 +1,60 @@
-  <div class="carousel-container">
-        <div class="carousel-header">
+<div class="carousel-container">
+      <div class="carousel-header">
             <h1>Technology Stack</h1>
             <p>Explore the cutting-edge technologies powering modern web development</p>
         </div>
+    <div class="carousel">
+        <div
+    class="carousel-track"
+    [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'" #carouselTrack
+    >
+    @for (card of cards; track card; let i = $index) {
+        <div class="tech-card">
+            <div class="tech-content">
+                <span class="tech-icon">
+                    @if (card.icon.endsWith('.svg')) {
+                        <img [src]="card.icon" alt="{{ card.name }}" />
+            } @else {
+              {{ card.icon }}
+            }
+        </span>
+        
+        <h2 class="tech-name">{{ card.name }}</h2>
+        <p class="tech-description">{{ card.description }}</p>
 
-        <div class="carousel">
-            <div class="carousel-track" id="carouselTrack">
-                <div class="tech-card">
-                    <div class="tech-content">
-                        <span class="tech-icon">⚛️</span>
-                        <h2 class="tech-name">React</h2>
-                        <p class="tech-description">A powerful JavaScript library for building user interfaces with component-based architecture and virtual DOM for optimal performance.</p>
-                        <div class="tech-features">
-                            <span class="feature-tag">Virtual DOM</span>
-                            <span class="feature-tag">Component-Based</span>
-                            <span class="feature-tag">JSX</span>
-                            <span class="feature-tag">Hooks</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-content">
-                        <span class="tech-icon">🟢</span>
-                        <h2 class="tech-name">Node.js</h2>
-                        <p class="tech-description">JavaScript runtime built on Chrome's V8 engine, enabling server-side development with non-blocking, event-driven architecture.</p>
-                        <div class="tech-features">
-                            <span class="feature-tag">Event-Driven</span>
-                            <span class="feature-tag">Non-Blocking I/O</span>
-                            <span class="feature-tag">NPM Ecosystem</span>
-                            <span class="feature-tag">Cross-Platform</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-content">
-                        <span class="tech-icon">💚</span>
-                        <h2 class="tech-name">MongoDB</h2>
-                        <p class="tech-description">NoSQL document database that provides high performance, high availability, and easy scalability with flexible schema design.</p>
-                        <div class="tech-features">
-                            <span class="feature-tag">Document-Based</span>
-                            <span class="feature-tag">Flexible Schema</span>
-                            <span class="feature-tag">Scalable</span>
-                            <span class="feature-tag">JSON-like</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-content">
-                        <span class="tech-icon">🎨</span>
-                        <h2 class="tech-name">Tailwind CSS</h2>
-                        <p class="tech-description">Utility-first CSS framework that provides low-level utility classes to build custom designs without leaving your HTML.</p>
-                        <div class="tech-features">
-                            <span class="feature-tag">Utility-First</span>
-                            <span class="feature-tag">Responsive</span>
-                            <span class="feature-tag">Customizable</span>
-                            <span class="feature-tag">Fast Development</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-content">
-                        <span class="tech-icon">🔧</span>
-                        <h2 class="tech-name">Express.js</h2>
-                        <p class="tech-description">Fast, unopinionated, minimalist web framework for Node.js that provides robust features for web and mobile applications.</p>
-                        <div class="tech-features">
-                            <span class="feature-tag">Minimalist</span>
-                            <span class="feature-tag">Middleware</span>
-                            <span class="feature-tag">RESTful APIs</span>
-                            <span class="feature-tag">Fast</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-content">
-                        <span class="tech-icon">🐙</span>
-                        <h2 class="tech-name">Git & GitHub</h2>
-                        <p class="tech-description">Distributed version control system and cloud-based hosting service for managing code repositories and collaboration.</p>
-                        <div class="tech-features">
-                            <span class="feature-tag">Version Control</span>
-                            <span class="feature-tag">Collaboration</span>
-                            <span class="feature-tag">Branching</span>
-                            <span class="feature-tag">Open Source</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-content">
-                        <span class="tech-icon">☁️</span>
-                        <h2 class="tech-name">Cloud Platforms</h2>
-                        <p class="tech-description">Modern cloud infrastructure services like AWS, Vercel, and Netlify for scalable deployment and hosting solutions.</p>
-                        <div class="tech-features">
-                            <span class="feature-tag">Scalable</span>
-                            <span class="feature-tag">CI/CD</span>
-                            <span class="feature-tag">Global CDN</span>
-                            <span class="feature-tag">Serverless</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-content">
-                        <span class="tech-icon">📱</span>
-                        <h2 class="tech-name">Responsive Design</h2>
-                        <p class="tech-description">Modern web design approach ensuring optimal viewing experience across all devices with fluid grids and flexible layouts.</p>
-                        <div class="tech-features">
-                            <span class="feature-tag">Mobile-First</span>
-                            <span class="feature-tag">Flexible Grids</span>
-                            <span class="feature-tag">Media Queries</span>
-                            <span class="feature-tag">Cross-Device</span>
-                        </div>
-                    </div>
-                </div>
+          <div class="tech-features">
+              @for (feature of card.features; track feature) {
+                  <span class="feature-tag">{{ feature }}</span>
+                } @empty {
+                    <span class="feature-tag">No features</span>
+                }
             </div>
         </div>
-
-        <div class="carousel-controls">
-            <button class="control-btn" id="prevBtn">←</button>
-            <div class="carousel-indicators" id="indicators"></div>
-            <button class="control-btn" id="nextBtn">→</button>
-        </div>
-
-        <div style="text-align: center; margin-top: 20px;">
-            <button class="auto-play-btn" id="autoPlayBtn">▶ Auto Play</button>
-        </div>
     </div>
+} @empty {
+    <div class="tech-card">
+        <p>No cards available</p>
+    </div>
+}
+</div>
+
+  <div class="carousel-indicators">
+    @for (card of cards;track $index; let i = $index) {
+        <div
+        class="indicator"
+        [class.active]="i === currentIndex"
+        (click)="goToSlide(i)"
+      ></div>
+    }
+</div>
+
+
+</div>
+<div class="carousel-controls">
+    <button id="prevBtn" (click)="prevSlide()">PREV</button>
+    <button id="nextBtn" (click)="nextSlide()">NEXTTTTTTT</button>
+    <button id="autoPlayBtn" (click)="toggleAutoPlay()">
+        {{ isAutoPlaying ? '⏸ Pause' : '▶ Auto Play' }}
+    </button>
+</div>
+</div>
