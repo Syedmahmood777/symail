@@ -13,7 +13,7 @@
             <div class="tech-content">
                 <span class="tech-icon">
                     @if (card.icon.endsWith('.svg')) {
-                        <img [src]="card.icon" alt="{{ card.name }}" />
+                        <img [src]="card.icon" alt="{{ card.name }}" class="tech-img"/>
             } @else {
               {{ card.icon }}
             }
@@ -38,23 +38,33 @@
 }
 </div>
 
-  <div class="carousel-indicators">
-    @for (card of cards;track $index; let i = $index) {
-        <div
-        class="indicator"
-        [class.active]="i === currentIndex"
-        (click)="goToSlide(i)"
-      ></div>
-    }
+
+
 </div>
-
-
+<div class="carousel-indicators">
+  @for (card of cards;track $index; let i = $index) {
+      <div
+      class="indicator"
+      [class.active]="i === currentIndex"
+      (click)="goToSlide(i)"
+    ></div>
+  }
 </div>
 <div class="carousel-controls">
-    <button id="prevBtn" (click)="prevSlide()">PREV</button>
-    <button id="nextBtn" (click)="nextSlide()">NEXTTTTTTT</button>
-    <button id="autoPlayBtn" (click)="toggleAutoPlay()">
+    <button id="prevBtn" (click)="prevSlide()">
+        <span>‹</span>
+    </button>
+    
+    <button 
+        id="autoPlayBtn" 
+        [class.playing]="isAutoPlaying"
+        (click)="toggleAutoPlay()"
+    >
         {{ isAutoPlaying ? '⏸ Pause' : '▶ Auto Play' }}
+    </button>
+    
+    <button id="nextBtn" (click)="nextSlide()">
+        <span>›</span>
     </button>
 </div>
 </div>

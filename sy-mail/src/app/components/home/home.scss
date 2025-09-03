@@ -11,6 +11,12 @@
   padding-top: 30vh;            /* control vertical offset */
 }
 
+.container-0, .container-2, .container-3, .container-4, .container-5 {
+  position: relative;
+  z-index: 0;
+}
+
+
 .parent {
   display: flex;
   justify-content: space-around;

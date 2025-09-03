@@ -1,0 +1,28 @@
+.footer{
+    height: 30%;
+
+    z-index: 2;
+    position: relative;
+    background: #111;
+  color: #eee;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.footer-logo {
+  font-size: 1.8rem;
+  color: #D93025;  /* brand red */
+  margin: 0;
+}
+
+.footer-tagline {
+  font-size: 1rem;
+  margin: 8px 0;
+  color: #aaa;
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  margin-top: 12px;
+  color: #666;
+}

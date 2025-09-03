@@ -5,12 +5,13 @@ import { Carousel } from '../carousel/carousel';
 import { isPlatformBrowser } from '@angular/common';
 import { ViewChildren, QueryList } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Footer } from '../footer/footer';
 
 @Component({
   
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Bgshapes, Carousel,RouterLink],
+  imports: [CommonModule, Bgshapes, Carousel, RouterLink, Footer],
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
 })

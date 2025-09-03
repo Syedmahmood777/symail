@@ -4,6 +4,7 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   animation: float 20s ease-in-out infinite;
+  z-index: 0;
 }
 
 .bg-shape:nth-child(1) { width: 60px; height: 60px; top: 10%; left: 20%; animation-duration: 18s; animation-delay: 2s; }
