@@ -1,17 +1,60 @@
 <div class="container">
-    <div class="signup-container">
-        <form action="">
-            <label for="first" >First Name</label>
-            <input type="email" name="email">
-            <label for="email" ></label>
-            <input type="email" name="email">
-            <label for="email" >Email</label>
-            <input type="email" name="email">
-            <label for="email" >Email</label>
-            <input type="email" name="email">
+    <div class="form-container">
+        <div class="icon-container">
+            <img src="assets/icon/sy_final.svg" height="45%">
 
+        </div>
+        <h1>Sign Up</h1>
+        <form [formGroup]="form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>                   
+                    <input type="text" id="firstName" name="firstName" formControlName="fName" >
+                    <div class="error-msg" id="fName">*Required</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" >
+                    <div class="error-msg" id="lName">*Required</div>
+                </div>
+            </div>           
+                      
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="jim_jones221@symail.co" >
+                <div class="error-msg" id="emailError">*Email Error</div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" >
+                <div class="error-msg">*Invalid Date of Birth</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" >
+                <div class="error-msg" id="pStrength">*Weak Password</div>
+            </div>
+            <div class="form-group">
+                <label for="password">Re-Enter Password</label>
+                <input type="password" id="rpassword" name="rpassword" >
+                <div class="error-msg" id="pMatchingError">*Passwords Do Not Match</div>
+            </div>
+            <div class="p-guidelines" id="pConstraints">
+                Password must contain at least:
+                <ul>
+                    <li>1 lowercase</li>
+                    <li>1 uppercase</li>
+                    <li>1 number</li>
+                    <li>1 special character</li>
+                    <li>Minimum length 9</li>
+                </ul>
+                </div>
+            
+            
+            <button type="submit" class="submit-btn">Create Account</button>
         </form>
-
     </div>
-
 </div>
