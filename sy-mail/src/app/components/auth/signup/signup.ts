@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup,FormControl,Validators,ReactiveFormsModule,AbstractControl} from '@angular/forms';
-
+import { FormGroup,FormControl,Validators,ReactiveFormsModule,AbstractControl, ValidationErrors} from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -14,18 +13,38 @@ export class Signup {
     fName:new FormControl('',Validators.required),
     lName:new FormControl('',Validators.required),
     email: new FormControl('', Validators.email),
-     password: new FormControl('', [
+     pass: new FormControl('', [
       Validators.required,
       Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,}$/)
     ]),
+    rpass:new FormControl('',[Validators.required]),
      dob: new FormControl('', [Validators.required, this.dobValidator])
 
-  }); 
+  },
+  {validators:this.passwordValidator}
+
+); 
+
+  
 
   private markAlltouched(){
     Object.values(this.form.controls).forEach(control=>{
       control.markAsTouched()
     })
+  }
+
+    onSubmit() {
+    if (this.form.invalid) {
+      this.markAlltouched();
+      return;
+    }
+
+  }
+
+  passwordValidator(group:AbstractControl): ValidationErrors | null {
+    const pass = group.get('pass')?.value;
+    const rpass = group.get('rpass')?.value;
+  return pass === rpass ? null : { notMatched: true };
   }
 
   dobValidator(control: AbstractControl) {
