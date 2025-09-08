@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormControl,Validators,ReactiveFormsModule,AbstractControl, ValidationErrors} from '@angular/forms';
 
+
 @Component({
   selector: 'app-signup',
   imports: [ReactiveFormsModule],
@@ -9,19 +10,29 @@ import { FormGroup,FormControl,Validators,ReactiveFormsModule,AbstractControl, V
 })
 
 export class Signup {
+  currStep=2;
   form = new FormGroup({
     fName:new FormControl('',Validators.required),
     lName:new FormControl('',Validators.required),
-    email: new FormControl('', Validators.email),
+    email: new FormControl('', [
+  Validators.required,
+  Validators.pattern(/^[a-zA-Z0-9._%+-]+@symail\.co$/)
+]),
      pass: new FormControl('', [
       Validators.required,
       Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,}$/)
     ]),
     rpass:new FormControl('',[Validators.required]),
-     dob: new FormControl('', [Validators.required, this.dobValidator])
+     dob: new FormControl('dd/mm/yy', [Validators.required, this.dobValidator])
 
   },
   {validators:this.passwordValidator}
+
+);
+
+  form2 = new FormGroup({
+    pNo:new FormControl('',Validators.required),
+  }
 
 ); 
 
@@ -78,5 +89,16 @@ export class Signup {
     }
 
     return null; 
+  }
+
+  nextStep(){
+    if(this.currStep<3){
+      this.currStep++;
+    }
+  }
+  prevStep(){
+    if(this.currStep>1){
+      this.currStep--;
+    }
   }
 }

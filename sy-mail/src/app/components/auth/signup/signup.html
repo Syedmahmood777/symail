@@ -1,68 +1,106 @@
 <div class="container">
     <div class="form-container">
+
         <div class="icon-container" style="margin-bottom: 2em;">
             <img src="assets/icon/sy_final.svg" height="45%">
 
         </div>
         <h1>Sign Up</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="form-row">
+        @if(currStep==1){
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>                   
+                        <input type="text" id="firstName" name="firstName" placeholder="Jim" formControlName="fName" >
+                        @if(form.get('fName')?.invalid && (form.get('fName')?.touched || form.get('fName')?.dirty))
+                        {
+                            @if(form.get('fName')?.invalid) {
+                                <div class="error-msg">*Required</div>
+                         }
+      }
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName"
+                        placeholder="Jones" formControlName="lName" >
+                         @if(form.get('lName')?.invalid && (form.get('lName')?.touched || form.get('lName')?.dirty))
+                        {
+                            @if(form.get('lName')?.invalid) {
+                            <div class="error-msg">*Required</div>
+                         }
+      }
+                    </div>
+                </div>           
+                          
                 <div class="form-group">
-                    <label for="firstName">First Name</label>                   
-                    <input type="text" id="firstName" name="firstName" placeholder="Jim" formControlName="fName" >
-                    <div class="error-msg" id="fName">*Required</div>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" formControlName="email" placeholder="jim_jones221@symail.co" >
+                   @if(form.get('email')?.errors?.['pattern'] && form.get('email')?.touched){
+            @if(form.get('email')?.errors?.['pattern'] && form.get('email')?.touched){
+      <div class="error-msg">
+        *Email can use letters, numbers, dots (.), underscores (_), percent (%), plus (+), hyphens (-) and must end with <strong>
+    @symail.co
+        </strong>
+      </div>
+    }
+    }@else if(form.get('email')?.touched && form.get('email')?.invalid){
+        <div class="error-msg">
+          *Email is required </div>
+    
+    }
+    
+    
                 </div>
-                
+    
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName"
-                    placeholder="Jones" formControlName="lName" >
-                    <div class="error-msg" id="lName">*Required</div>
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth" formControlName="dob">
+                    @if (form.get('dob')?.invalid && form.get('dob')?.touched) {
+                    <div class="error-msg">*Enter a valid date of birth</div>
+                    }
+                  
                 </div>
-            </div>           
-                      
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" formControlName="email" placeholder="jim_jones221@symail.co" >
-                <div class="error-msg" id="emailError">*Email Error</div>
-            </div>
-
-            <div class="form-group">
-                <label for="dateOfBirth">Date of Birth</label>
-                <input type="date" id="dateOfBirth" name="dateOfBirth" formControlName="dob">
-                @if (form.get('dob')?.invalid) {
-                <div class="error-msg">*Enter a valid date of birth</div>
-                }
-                @if (form.get('dob')?.touched) {
-                <div class="error-msg">*Date of Birth is Required</div>
-                }
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" formControlName="pass">               
-            </div>
-            <div class="form-group">
-                <label for="password">Re-Enter Password</label>
-                <input type="password" id="rpassword" name="rpassword" formControlName="rpass" >
-                @if(form.get('rpass')?.errors?.['notMatched']){
-                    <div class="error-msg" id="pMatchingError">*Passwords Do Not Match</div>
+    
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" formControlName="pass">     
+                     @if (form.get('pass')?.invalid && form.get('pass')?.touched) {
+                    <div class="error-msg">*Password is required</div>
+                    }
+                    
+                </div>
+                <div class="form-group">
+                    <label for="password">Re-Enter Password</label>
+                    <input type="password" id="rpassword" name="rpassword" formControlName="rpass" >
+                    @if(form.errors?.['notMatched']){
+                        <div class="error-msg" id="pMatchingError">*Passwords Do Not Match</div>
+                    }               
+                </div>
+    
+                @if(form.get('pass')?.errors?.['pattern'] && form.get('pass')?.touched){
+                <div class="p-guidelines" id="pConstraints">
+                    Password must contain at least:
+                    <ul>
+                        <li>1 lowercase</li>
+                        <li>1 uppercase</li>
+                        <li>1 number</li>
+                        <li>1 special character</li>
+                        <li>Minimum length 9</li>
+                    </ul>
+                    </div>
                 }
                 
-            </div>
-            <div class="p-guidelines" id="pConstraints">
-                Password must contain at least:
-                <ul>
-                    <li>1 lowercase</li>
-                    <li>1 uppercase</li>
-                    <li>1 number</li>
-                    <li>1 special character</li>
-                    <li>Minimum length 9</li>
-                </ul>
-                </div>
-            
-            
-            <button type="submit" class="submit-btn">Create Account</button>
-        </form>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+        }@else if(currStep==2){
+            <form [formGroup]="form2">
+                
+                <label for="pNum">Phone Number</label>                   
+                        <input type="number" id="pNum" name="pNum" placeholder="+91-9381913352" formControlName="pNo" >
+
+            </form>
+
+        }
     </div>
 </div>

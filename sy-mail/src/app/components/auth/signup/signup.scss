@@ -177,3 +177,36 @@ input:hover {
   color: #d93025; /* subtle red to match your theme */
   font-weight: 500;
 }
+
+/* Hide the step header (numbers and labels) */
+.mat-horizontal-stepper-header {
+  display: none;
+}
+
+/* Remove default padding/margins from step container */
+.mat-stepper-horizontal {
+  padding: 0;
+  margin: 0;
+}
+
+/* Remove the horizontal line between steps */
+.mat-horizontal-stepper-line {
+  display: none;
+}
+
+/* Remove the circle/indicator for each step */
+.mat-step-icon {
+  display: none;
+}
+
+/* Optional: remove button spacing if needed */
+.mat-stepper-next, .mat-stepper-previous {
+  margin: 0;
+  padding: 0;
+}
+
+.mat-stepper{   
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
