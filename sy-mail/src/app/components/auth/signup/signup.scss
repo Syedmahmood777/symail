@@ -178,35 +178,265 @@ input:hover {
   font-weight: 500;
 }
 
-/* Hide the step header (numbers and labels) */
-.mat-horizontal-stepper-header {
-  display: none;
-}
+.container-p {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
 
-/* Remove default padding/margins from step container */
-.mat-stepper-horizontal {
-  padding: 0;
-  margin: 0;
-}
+        h1 {
+            color: #1f2937;
+            margin-bottom: 30px;
+            text-align: center;
+        }
 
-/* Remove the horizontal line between steps */
-.mat-horizontal-stepper-line {
-  display: none;
-}
+        .phone-input-wrapper {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
 
-/* Remove the circle/indicator for each step */
-.mat-step-icon {
-  display: none;
-}
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
 
-/* Optional: remove button spacing if needed */
-.mat-stepper-next, .mat-stepper-previous {
-  margin: 0;
-  padding: 0;
-}
+        .input-container {
+            display: flex;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            transition: all 0.2s ease;
+            position: relative;
+        }
 
-.mat-stepper{   
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+        .input-container:hover {
+            border-color: #9ca3af;
+        }
+
+        .input-container.focused {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .country-selector {
+            position: relative;
+        }
+
+        .country-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #f9fafb;
+            border: none;
+            border-right: 2px solid #d1d5db;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            min-width: 130px;
+            height: 100%;
+        }
+
+        .country-button:hover {
+            background: #f3f4f6;
+        }
+
+        .country-button.active {
+            background: #e5e7eb;
+        }
+
+        .flag {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .dial-code {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .chevron {
+            width: 16px;
+            height: 16px;
+            color: #6b7280;
+            transition: transform 0.2s ease;
+        }
+
+        .chevron.rotated {
+            transform: rotate(180deg);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #d1d5db;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-height: 280px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .dropdown.open {
+            display: block;
+        }
+
+        .search-container {
+            padding: 12px;
+            border-bottom: 1px solid #f3f4f6;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 40px 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: #6b7280;
+        }
+
+        .country-list {
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        .country-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-align: left;
+        }
+
+        .country-option:hover {
+            background: #f9fafb;
+        }
+
+        .country-option.selected {
+            background: #eff6ff;
+        }
+
+        .country-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .country-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #111827;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .country-dial-code {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .phone-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #111827;
+            background: transparent;
+        }
+
+        .phone-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .full-number-display {
+            margin-top: 12px;
+            padding: 12px;
+            background: #dbeafe;
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #1e40af;
+            display: none;
+        }
+
+        .full-number-display.show {
+            display: block;
+        }
+
+        .no-results {
+            padding: 20px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .features-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .features-info h3 {
+            color: #1f2937;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .features-info ul {
+            list-style: none;
+        }
+
+        .features-info li {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 6px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .features-info li::before {
+            content: '•';
+            color: #3b82f6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
