@@ -81,8 +81,6 @@ form2 = new FormGroup({
     country:new FormControl (this.countries.find(c => c.code === 'IN'))
   }
 ); 
- 
-  
 
  
   searchControl = new FormControl('');

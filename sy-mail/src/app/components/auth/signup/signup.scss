@@ -192,40 +192,8 @@ input:hover {
             margin-bottom: 30px;
             text-align: center;
         }
-
-        .phone-input-wrapper {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .input-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 8px;
-        }
-
-        .input-container {
-            display: flex;
-            border: 2px solid #d1d5db;
-            border-radius: 8px;
-            overflow: hidden;
-            background: white;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .input-container:hover {
-            border-color: #9ca3af;
-        }
-
-        .input-container.focused {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
+ 
+              
         .country-selector {
             position: relative;
         }
@@ -234,13 +202,14 @@ input:hover {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 16px;
+           
             background: #f9fafb;
             border: none;
             border-right: 2px solid #d1d5db;
             cursor: pointer;
+            padding: 1.2em;
             transition: background-color 0.2s ease;
-            min-width: 130px;
+            min-width: 4rem;
             height: 100%;
         }
 
@@ -274,6 +243,13 @@ input:hover {
             transform: rotate(180deg);
         }
 
+        .inputBar{
+          position: relative;
+          display: flex;
+          gap: 0;
+          flex-direction:row ;
+        }
+
         .dropdown {
             position: absolute;
             top: 100%;
@@ -285,9 +261,9 @@ input:hover {
             border-radius: 0 0 8px 8px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            max-height: 280px;
+            max-height: 200px;
             overflow: hidden;
-            display: none;
+            display: block;
         }
 
         .dropdown.open {
@@ -328,6 +304,7 @@ input:hover {
         .country-list {
             max-height: 220px;
             overflow-y: auto;
+            
         }
 
         .country-option {
@@ -371,31 +348,6 @@ input:hover {
             margin-top: 2px;
         }
 
-        .phone-input {
-            flex: 1;
-            padding: 12px 16px;
-            border: none;
-            outline: none;
-            font-size: 16px;
-            color: #111827;
-            background: transparent;
-        }
-
-        .phone-input::placeholder {
-            color: #9ca3af;
-        }
-
-        .full-number-display {
-            margin-top: 12px;
-            padding: 12px;
-            background: #dbeafe;
-            border: 1px solid #bfdbfe;
-            border-radius: 6px;
-            font-size: 14px;
-            color: #1e40af;
-            display: none;
-        }
-
         .full-number-display.show {
             display: block;
         }
@@ -407,36 +359,24 @@ input:hover {
             font-size: 14px;
         }
 
-        .features-info {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f9fafb;
-            border-radius: 8px;
-            border-left: 4px solid #3b82f6;
-        }
 
-        .features-info h3 {
-            color: #1f2937;
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
+.pInput {
+  width: 100%;
 
-        .features-info ul {
-            list-style: none;
-        }
+  border: 2px solid #e1e5e9;
+  border-radius: 0.1em;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #fff;
+}
 
-        .features-info li {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 6px;
-            padding-left: 16px;
-            position: relative;
-        }
+.pInput:focus {
+  outline: none;
+  border-color: #ff9790;
+  box-shadow: 0 0 0 3px rgba(217, 48, 37, 0.1);
+  transform: translateY(-1px);
+}
 
-        .features-info li::before {
-            content: '•';
-            color: #3b82f6;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
+.pInput:hover {
+  border-color: #c1c9d4;
+}

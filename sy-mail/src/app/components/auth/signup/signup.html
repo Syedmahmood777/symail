@@ -95,42 +95,52 @@
             </form>
         }@else if(currStep==2){
             <form [formGroup]="form2">
-                   <button 
-            type="button" 
-            class="country-button"
-            [class.active]="isDropdownOpen"
-            (click)="toggleDropdown()"
-          >
-            <span class="flag">{{ selectedCountry?.flag }}</span>
-            <span class="dial-code">{{ selectedCountry?.dialCode }}</span>
-            <svg class="chevron" [class.rotated]="isDropdownOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6,9 12,15 18,9"></polyline>
-            </svg>
-          </button>               
-                                 
-                        <input type="tel" id="pNum" name="pNum" placeholder="9381913352" formControlName="pNo" >
+                <div class="inputBar" >
 
-        <div class="search-container">
+                <div class="phoneParent">
+                            <button 
+                        type="button" 
+                        class="country-button"
+                        [class.active]="isDropdownOpen"
+                        (click)="toggleDropdown()">
+                        
+                        <span class="flag">{{ selectedCountry?.flag }}</span>
+                        <span class="dial-code">{{ selectedCountry?.dialCode }}</span>
+                        <svg class="chevron" [class.rotated]="isDropdownOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                        </button>               
+                </div>
+                    
+                <input type="tel" id="pNum" name="pNum" placeholder="9381913352" formControlName="pNo" class="pInput" >
+                        
+            </div>
+
+        <div class="search-container country-list">
+            @if(isDropdownOpen){
             <input
                 type="text"
                 class="search-input"
                 placeholder="Search countries..."
                 [formControl]="searchControl"
             />
-
-            @for (country of filteredCountries$ | async; track country.code) {
-                <button
-                type="button"
-                class="country-option"
-                (click)="selectCountry(country)"
-                >
-                <span class="flag">{{ country.flag }}</span>
-                <div class="country-info">
-                    <div class="country-name">{{ country.name }}</div>
-                    <div class="country-dial-code">{{ country.dialCode }}</div>
-                </div>
-                </button>
+            
+                @for (country of filteredCountries$ | async; track country.code) {
+                    <button
+                    type="button"
+                    class="country-option"
+                    (click)="selectCountry(country)"
+                    >
+                    <span class="flag">{{ country.flag }}</span>
+                    <div class="country-info">
+                        <div class="country-name">{{ country.name }}</div>
+                        <div class="country-dial-code">{{ country.dialCode }}</div>
+                    </div>
+                    </button>
+                }
+                
             }
+
             </div>
 
           </form>
