@@ -143,6 +143,34 @@
 
             </div>
 
+        <div class="inputBar2">
+        <span>Country:</span>
+        <div class="country-selector-container-1" (click)="toggleDropdown2()">
+            <button type="button" class="country-selected-1" id="countrySelector">
+                <span id="selectedCountryText">Select a country</span>
+                <div class="dropdown-arrow"></div>
+            </button>
+            <div class="country-dropdown-1" [class.show]="isDropdownOpen2" id="countryDropdown">                
+                @for (country of filteredCountries$ | async; track country.code) {
+                <div
+                class="country-option-1"
+                (click)="selectCountry2(country)"
+                >                
+                   {{ country.name }}                    
+                </div>
+            
+        }
+
+             
+            </div>
+        </div>
+    </div>
+        
+
+            <div class="">
+                <input type="text" name="" id="">
+            </div>
+
           </form>
 
         }

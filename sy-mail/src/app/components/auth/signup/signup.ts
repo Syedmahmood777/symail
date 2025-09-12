@@ -1,8 +1,8 @@
-import { Component,ElementRef, ViewChild } from '@angular/core';
+import { Component,ElementRef, ViewChild, HostListener  } from '@angular/core';
 import { FormGroup,FormControl,Validators,ReactiveFormsModule,AbstractControl, ValidationErrors} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, max, startWith } from 'rxjs/operators';
 
 interface Country {
   code: string;
@@ -22,6 +22,7 @@ export class Signup {
   @ViewChild('phoneInput') phoneInputRef!: ElementRef;
 
   currStep=2;
+
   form = new FormGroup({
     fName:new FormControl('',Validators.required),
     lName:new FormControl('',Validators.required),
@@ -73,12 +74,16 @@ export class Signup {
     { code: 'CH', name: 'Switzerland', flag: '🇨🇭', dialCode: '+41' },
     { code: 'AT', name: 'Austria', flag: '🇦🇹', dialCode: '+43' }
   ];
+
   selectedCountry=this.countries.find(c => c.code === 'IN')
+  selectedCountry2=this.countries.find(c => c.code === 'IN')?.name;
   
 form2 = new FormGroup({
     pNo:new FormControl('',Validators.required),
-    phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    country:new FormControl (this.countries.find(c => c.code === 'IN'))
+    phone: new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
+    country:new FormControl (this.countries.find(c => c.code === 'IN')),
+    state:new FormControl('',Validators.required),
+    address:new FormControl('',Validators.required),
   }
 ); 
 
@@ -86,6 +91,7 @@ form2 = new FormGroup({
   searchControl = new FormControl('');
   filteredCountries$!: Observable<Country[]>;
   isDropdownOpen = false;
+  isDropdownOpen2 = false;
 
   ngOnInit() {
     this.filteredCountries$ = this.searchControl.valueChanges.pipe(
@@ -103,14 +109,38 @@ form2 = new FormGroup({
     );
   }
 
+  @ViewChild('dropdown') dropdownRef!: ElementRef;
+
+@HostListener('document:click', ['$event'])
+onClick(event: Event) {
+  if (this.dropdownRef && !this.dropdownRef.nativeElement.contains(event.target)) {
+    // Close dropdown
+    console.log('Outside click, dropdown closed');
+  }
+}
+
   selectCountry(country:Country){
-    
+    this.selectedCountry=country;
+    this.isDropdownOpen=false;
+  }
+  selectCountry2(country:Country){
+    this.selectedCountry2=country.name;
+    this.isDropdownOpen2=false;
   }
 
 toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
     
     if (this.isDropdownOpen) {
+      setTimeout(() => {
+        this.searchInputRef?.nativeElement?.focus();
+      }, 0);     
+    }
+  }
+toggleDropdown2() {
+    this.isDropdownOpen2 = !this.isDropdownOpen2;
+    
+    if (this.isDropdownOpen2) {
       setTimeout(() => {
         this.searchInputRef?.nativeElement?.focus();
       }, 0);     
