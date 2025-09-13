@@ -463,12 +463,14 @@ input:hover {
             visibility: hidden;
             transform: translateY(-0.5rem);
             transition: all 0.2s ease;
+            display: none;
         }
 
         .country-dropdown-1.show {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+            display: block;
         }
 
         .country-option-1 {

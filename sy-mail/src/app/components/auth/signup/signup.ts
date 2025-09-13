@@ -3,6 +3,7 @@ import { FormGroup,FormControl,Validators,ReactiveFormsModule,AbstractControl, V
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { debounceTime, distinctUntilChanged, map, max, startWith } from 'rxjs/operators';
+import { rCountries } from '../../../../assets/countries';
 
 interface Country {
   code: string;
@@ -41,39 +42,20 @@ export class Signup {
   {validators:this.passwordValidator}
 
 );
-// Country data
-  countries: Country[] = [
-    { code: 'US', name: 'United States', flag: '🇺🇸', dialCode: '+1' },
-    { code: 'GB', name: 'United Kingdom', flag: '🇬🇧', dialCode: '+44' },
-    { code: 'CA', name: 'Canada', flag: '🇨🇦', dialCode: '+1' },
-    { code: 'AU', name: 'Australia', flag: '🇦🇺', dialCode: '+61' },
-    { code: 'DE', name: 'Germany', flag: '🇩🇪', dialCode: '+49' },
-    { code: 'FR', name: 'France', flag: '🇫🇷', dialCode: '+33' },
-    { code: 'IT', name: 'Italy', flag: '🇮🇹', dialCode: '+39' },
-    { code: 'ES', name: 'Spain', flag: '🇪🇸', dialCode: '+34' },
-    { code: 'NL', name: 'Netherlands', flag: '🇳🇱', dialCode: '+31' },
-    { code: 'BR', name: 'Brazil', flag: '🇧🇷', dialCode: '+55' },
-    { code: 'MX', name: 'Mexico', flag: '🇲🇽', dialCode: '+52' },
-    { code: 'IN', name: 'India', flag: '🇮🇳', dialCode: '+91' },
-    { code: 'CN', name: 'China', flag: '🇨🇳', dialCode: '+86' },
-    { code: 'JP', name: 'Japan', flag: '🇯🇵', dialCode: '+81' },
-    { code: 'KR', name: 'South Korea', flag: '🇰🇷', dialCode: '+82' },
-    { code: 'SG', name: 'Singapore', flag: '🇸🇬', dialCode: '+65' },
-    { code: 'AE', name: 'UAE', flag: '🇦🇪', dialCode: '+971' },
-    { code: 'SA', name: 'Saudi Arabia', flag: '🇸🇦', dialCode: '+966' },
-    { code: 'ZA', name: 'South Africa', flag: '🇿🇦', dialCode: '+27' },
-    { code: 'NG', name: 'Nigeria', flag: '🇳🇬', dialCode: '+234' },
-    { code: 'EG', name: 'Egypt', flag: '🇪🇬', dialCode: '+20' },
-    { code: 'TR', name: 'Turkey', flag: '🇹🇷', dialCode: '+90' },
-    { code: 'RU', name: 'Russia', flag: '🇷🇺', dialCode: '+7' },
-    { code: 'PL', name: 'Poland', flag: '🇵🇱', dialCode: '+48' },
-    { code: 'SE', name: 'Sweden', flag: '🇸🇪', dialCode: '+46' },
-    { code: 'NO', name: 'Norway', flag: '🇳🇴', dialCode: '+47' },
-    { code: 'DK', name: 'Denmark', flag: '🇩🇰', dialCode: '+45' },
-    { code: 'FI', name: 'Finland', flag: '🇫🇮', dialCode: '+358' },
-    { code: 'CH', name: 'Switzerland', flag: '🇨🇭', dialCode: '+41' },
-    { code: 'AT', name: 'Austria', flag: '🇦🇹', dialCode: '+43' }
-  ];
+getFlagEmoji(countryCode: string): string {
+  return countryCode
+    .toUpperCase()
+    .replace(/./g, char => String.fromCodePoint(127397 + char.charCodeAt(0)));
+}
+
+countries: Country[] = rCountries.map(c => ({
+  code: c.code,
+  name: c.name,
+  dialCode: c.dial_code,
+  flag: this.getFlagEmoji(c.code)
+})).sort((a, b) => a.name.localeCompare(b.name));
+
+
 
   selectedCountry=this.countries.find(c => c.code === 'IN')
   selectedCountry2=this.countries.find(c => c.code === 'IN')?.name;
@@ -81,8 +63,8 @@ export class Signup {
 form2 = new FormGroup({
     pNo:new FormControl('',Validators.required),
     phone: new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
-    country:new FormControl (this.countries.find(c => c.code === 'IN')),
-    state:new FormControl('',Validators.required),
+    country:new FormControl (this.selectedCountry),
+    city:new FormControl('',Validators.required),
     address:new FormControl('',Validators.required),
   }
 ); 
@@ -114,8 +96,7 @@ form2 = new FormGroup({
 @HostListener('document:click', ['$event'])
 onClick(event: Event) {
   if (this.dropdownRef && !this.dropdownRef.nativeElement.contains(event.target)) {
-    // Close dropdown
-    console.log('Outside click, dropdown closed');
+    this.isDropdownOpen2=false;
   }
 }
 
@@ -125,7 +106,7 @@ onClick(event: Event) {
   }
   selectCountry2(country:Country){
     this.selectedCountry2=country.name;
-    this.isDropdownOpen2=false;
+    this.toggleDropdown2();
   }
 
 toggleDropdown() {

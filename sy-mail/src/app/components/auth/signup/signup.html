@@ -1,178 +1,236 @@
 <div class="container">
-    <div class="form-container">
-
-        <div class="icon-container" style="margin-bottom: 2em;">
-            <img src="assets/icon/sy_final.svg" height="45%">
-
+  <div class="form-container">
+    <div class="icon-container" style="margin-bottom: 2em">
+      <img src="assets/icon/sy_final.svg" height="45%" />
+    </div>
+    <h1>Sign Up</h1>
+    @if(currStep==1){
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="Jim"
+            formControlName="fName"
+          />
+          @if(form.get('fName')?.invalid && (form.get('fName')?.touched ||
+          form.get('fName')?.dirty)) { @if(form.get('fName')?.invalid) {
+          <div class="error-msg">*Required</div>
+          } }
         </div>
-        <h1>Sign Up</h1>
-        @if(currStep==1){
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>                   
-                        <input type="text" id="firstName" name="firstName" placeholder="Jim" formControlName="fName" >
-                        @if(form.get('fName')?.invalid && (form.get('fName')?.touched || form.get('fName')?.dirty))
-                        {
-                            @if(form.get('fName')?.invalid) {
-                                <div class="error-msg">*Required</div>
-                         }
-      }
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName"
-                        placeholder="Jones" formControlName="lName" >
-                         @if(form.get('lName')?.invalid && (form.get('lName')?.touched || form.get('lName')?.dirty))
-                        {
-                            @if(form.get('lName')?.invalid) {
-                            <div class="error-msg">*Required</div>
-                         }
-      }
-                    </div>
-                </div>           
-                          
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" formControlName="email" placeholder="jim_jones221@symail.co" >
-                   @if(form.get('email')?.errors?.['pattern'] && form.get('email')?.touched){
-            @if(form.get('email')?.errors?.['pattern'] && form.get('email')?.touched){
-      <div class="error-msg">
-        *Email can use letters, numbers, dots (.), underscores (_), percent (%), plus (+), hyphens (-) and must end with <strong>
-    @symail.co
-        </strong>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Jones"
+            formControlName="lName"
+          />
+          @if(form.get('lName')?.invalid && (form.get('lName')?.touched ||
+          form.get('lName')?.dirty)) { @if(form.get('lName')?.invalid) {
+          <div class="error-msg">*Required</div>
+          } }
+        </div>
       </div>
-    }
-    }@else if(form.get('email')?.touched && form.get('email')?.invalid){
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          placeholder="jim_jones221@symail.co"
+        />
+        @if(form.get('email')?.errors?.['pattern'] &&
+        form.get('email')?.touched){ @if(form.get('email')?.errors?.['pattern']
+        && form.get('email')?.touched){
         <div class="error-msg">
-          *Email is required </div>
-    
-    }
-    
-    
-                </div>
-    
-                <div class="form-group">
-                    <label for="dateOfBirth">Date of Birth</label>
-                    <input type="date" id="dateOfBirth" name="dateOfBirth" formControlName="dob">
-                    @if (form.get('dob')?.invalid && form.get('dob')?.touched) {
-                    <div class="error-msg">*Enter a valid date of birth</div>
-                    }
-                  
-                </div>
-    
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" formControlName="pass">     
-                     @if (form.get('pass')?.invalid && form.get('pass')?.touched) {
-                    <div class="error-msg">*Password is required</div>
-                    }
-                    
-                </div>
-                <div class="form-group">
-                    <label for="password">Re-Enter Password</label>
-                    <input type="password" id="rpassword" name="rpassword" formControlName="rpass" >
-                    @if(form.errors?.['notMatched']){
-                        <div class="error-msg" id="pMatchingError">*Passwords Do Not Match</div>
-                    }               
-                </div>
-    
-                @if(form.get('pass')?.errors?.['pattern'] && form.get('pass')?.touched){
-                <div class="p-guidelines" id="pConstraints">
-                    Password must contain at least:
-                    <ul>
-                        <li>1 lowercase</li>
-                        <li>1 uppercase</li>
-                        <li>1 number</li>
-                        <li>1 special character</li>
-                        <li>Minimum length 9</li>
-                    </ul>
-                    </div>
-                }
-                
-                <button type="submit" class="submit-btn">Create Account</button>
-            </form>
-        }@else if(currStep==2){
-            <form [formGroup]="form2">
-                <div class="inputBar" >
-
-                <div class="phoneParent">
-                            <button 
-                        type="button" 
-                        class="country-button"
-                        [class.active]="isDropdownOpen"
-                        (click)="toggleDropdown()">
-                        
-                        <span class="flag">{{ selectedCountry?.flag }}</span>
-                        <span class="dial-code">{{ selectedCountry?.dialCode }}</span>
-                        <svg class="chevron" [class.rotated]="isDropdownOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"></polyline>
-                        </svg>
-                        </button>               
-                </div>
-                    
-                <input type="tel" id="pNum" name="pNum" placeholder="9381913352" formControlName="pNo" class="pInput" >
-                        
-            </div>
-
-        <div class="search-container country-list">
-            @if(isDropdownOpen){
-            <input
-                type="text"
-                class="search-input"
-                placeholder="Search countries..."
-                [formControl]="searchControl"
-            />
-            
-                @for (country of filteredCountries$ | async; track country.code) {
-                    <button
-                    type="button"
-                    class="country-option"
-                    (click)="selectCountry(country)"
-                    >
-                    <span class="flag">{{ country.flag }}</span>
-                    <div class="country-info">
-                        <div class="country-name">{{ country.name }}</div>
-                        <div class="country-dial-code">{{ country.dialCode }}</div>
-                    </div>
-                    </button>
-                }
-                
-            }
-
-            </div>
-
-        <div class="inputBar2">
-        <span>Country:</span>
-        <div class="country-selector-container-1" (click)="toggleDropdown2()">
-            <button type="button" class="country-selected-1" id="countrySelector">
-                <span id="selectedCountryText">Select a country</span>
-                <div class="dropdown-arrow"></div>
-            </button>
-            <div class="country-dropdown-1" [class.show]="isDropdownOpen2" id="countryDropdown">                
-                @for (country of filteredCountries$ | async; track country.code) {
-                <div
-                class="country-option-1"
-                (click)="selectCountry2(country)"
-                >                
-                   {{ country.name }}                    
-                </div>
-            
-        }
-
-             
-            </div>
+          *Email can use letters, numbers, dots (.), underscores (_), percent
+          (%), plus (+), hyphens (-) and must end with
+          <strong> @symail.co </strong>
         </div>
-    </div>
-        
-
-            <div class="">
-                <input type="text" name="" id="">
-            </div>
-
-          </form>
+        } }@else if(form.get('email')?.touched && form.get('email')?.invalid){
+        <div class="error-msg">*Email is required</div>
 
         }
-    </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">Date of Birth</label>
+        <input
+          type="date"
+          id="dateOfBirth"
+          name="dateOfBirth"
+          formControlName="dob"
+        />
+        @if (form.get('dob')?.invalid && form.get('dob')?.touched) {
+        <div class="error-msg">*Enter a valid date of birth</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          formControlName="pass"
+        />
+        @if (form.get('pass')?.invalid && form.get('pass')?.touched) {
+        <div class="error-msg">*Password is required</div>
+        }
+      </div>
+      <div class="form-group">
+        <label for="password">Re-Enter Password</label>
+        <input
+          type="password"
+          id="rpassword"
+          name="rpassword"
+          formControlName="rpass"
+        />
+        @if(form.errors?.['notMatched']){
+        <div class="error-msg" id="pMatchingError">*Passwords Do Not Match</div>
+        }
+      </div>
+
+      @if(form.get('pass')?.errors?.['pattern'] && form.get('pass')?.touched){
+      <div class="p-guidelines" id="pConstraints">
+        Password must contain at least:
+        <ul>
+          <li>1 lowercase</li>
+          <li>1 uppercase</li>
+          <li>1 number</li>
+          <li>1 special character</li>
+          <li>Minimum length 9</li>
+        </ul>
+      </div>
+      }
+
+      <button type="submit" class="submit-btn">Create Account</button>
+    </form>
+    }@else if(currStep==2){
+    <form [formGroup]="form2">
+      <label
+        for="pNum"
+        style="font-weight: 500; color: #374151; white-space: nowrap"
+        >Phone Number</label
+      >
+      <div class="inputBar">
+        <div class="phoneParent">
+          <button
+            type="button"
+            class="country-button"
+            [class.active]="isDropdownOpen"
+            (click)="toggleDropdown()"
+          >
+            <span class="flag">{{ selectedCountry?.flag }}</span>
+            <span class="dial-code">{{ selectedCountry?.dialCode }}</span>
+            <svg
+              class="chevron"
+              [class.rotated]="isDropdownOpen"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <input
+          type="tel"
+          id="pNum"
+          name="pNum"
+          placeholder="9381913352"
+          formControlName="pNo"
+          class="pInput"
+          maxlength="10"
+        />
+      </div>
+
+      <div class="search-container country-list">
+        @if(isDropdownOpen){
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search countries..."
+          [formControl]="searchControl"
+        />
+
+        @for (country of filteredCountries$ | async; track country.code) {
+        <button
+          type="button"
+          class="country-option"
+          (click)="selectCountry(country)"
+        >
+          <span class="flag">{{ country.flag }}</span>
+          <div class="country-info">
+            <div class="country-name">{{ country.name }}</div>
+            <div class="country-dial-code">{{ country.dialCode }}</div>
+          </div>
+        </button>
+        } }
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="country">Country</label>
+          <div
+            class="country-selector-container-1"
+            (click)="toggleDropdown2()"
+            #dropdown
+          >
+            <button
+              type="button"
+              class="country-selected-1"
+              id="countrySelector"
+            >
+              <span id="selectedCountryText">{{ selectedCountry2 }}</span>
+              <div class="dropdown-arrow"></div>
+            </button>
+            <div
+              class="country-dropdown-1"
+              [class.show]="isDropdownOpen2"
+              id="countryDropdown"
+            >
+              @for (country of filteredCountries$ | async; track country.code) {
+              <div
+                class="country-option-1"
+                (click)="selectCountry2(country); $event.stopPropagation()"
+              >
+                {{ country.name }}
+              </div>
+
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" formControlName="city" />
+          @if(form2.get('city')?.invalid && (form2.get('city')?.touched ||
+          form2.get('city')?.dirty)) { @if(form2.get('city')?.invalid) {
+          <div class="error-msg">*Required</div>
+          } }
+        </div>
+      </div>
+
+      <div class="">
+        <label for="city">City</label>
+        <input type="text" name="city" id="" />
+        <label for="address">Address</label>
+        <input type="text" name="address" id="" />
+      </div>
+    </form>
+
+    }
+  </div>
 </div>
