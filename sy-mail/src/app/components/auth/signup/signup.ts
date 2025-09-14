@@ -74,7 +74,6 @@ export class Signup {
     .sort((a, b) => a.name.localeCompare(b.name));
 
   selectedCountry = this.countries.find((c) => c.code === 'IN');
-  selectedCountry2 = this.countries.find((c) => c.code === 'IN')?.name;
 
   form2 = new FormGroup({
     pNo: new FormControl('', Validators.required),
@@ -83,15 +82,19 @@ export class Signup {
       Validators.minLength(10),
       Validators.maxLength(10),
     ]),
-    country: new FormControl(this.selectedCountry),
+    country: new FormControl(this.selectedCountry?.name),
     city: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
+    pin: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(6),
+    ]),
   });
 
   searchControl = new FormControl('');
   filteredCountries$!: Observable<Country[]>;
   isDropdownOpen = false;
-  isDropdownOpen2 = false;
 
   ngOnInit() {
     this.filteredCountries$ = this.searchControl.valueChanges.pipe(
@@ -100,12 +103,7 @@ export class Signup {
       distinctUntilChanged(),
       map((term) => (term || '').toLowerCase()),
       map((term) =>
-        this.countries.filter(
-          (c) =>
-            c.name.toLowerCase().includes(term) ||
-            c.dialCode.includes(term) ||
-            c.code.toLowerCase().includes(term)
-        )
+        this.countries.filter((c) => c.name.toLowerCase().startsWith(term))
       )
     );
   }
@@ -118,17 +116,13 @@ export class Signup {
       this.dropdownRef &&
       !this.dropdownRef.nativeElement.contains(event.target)
     ) {
-      this.isDropdownOpen2 = false;
+      this.isDropdownOpen = false;
     }
   }
 
   selectCountry(country: Country) {
     this.selectedCountry = country;
     this.isDropdownOpen = false;
-  }
-  selectCountry2(country: Country) {
-    this.selectedCountry2 = country.name;
-    this.toggleDropdown2();
   }
 
   toggleDropdown() {
@@ -140,31 +134,22 @@ export class Signup {
       }, 0);
     }
   }
-  toggleDropdown2() {
-    this.isDropdownOpen2 = !this.isDropdownOpen2;
 
-    if (this.isDropdownOpen2) {
-      setTimeout(() => {
-        this.searchInputRef?.nativeElement?.focus();
-      }, 0);
-    }
-  }
-
-  private markAlltouched() {
-    Object.values(this.form.controls).forEach((control) => {
+  private markAlltouched(form: FormGroup) {
+    Object.values(form.controls).forEach((control) => {
       control.markAsTouched();
     });
   }
 
   onSubmit() {
     if (this.form.invalid) {
-      this.markAlltouched();
+      this.markAlltouched(this.form);
       return;
     }
   }
   onSubmit2() {
     if (this.form2.invalid) {
-      this.markAlltouched();
+      this.markAlltouched(this.form2);
       return;
     }
   }

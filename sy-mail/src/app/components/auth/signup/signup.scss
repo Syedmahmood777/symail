@@ -51,10 +51,22 @@ h1 {
   gap: 15px;
   flex-wrap: wrap; /* allows wrapping on smaller screens */
 }
+.form-row-1 {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap; /* allows wrapping on smaller screens */
+}
 
 .form-row .form-group {
   flex: 1;
   min-width: 200px; /* ensures inputs don’t shrink too much */
+}
+.form-row-1 .form-group.address {
+  flex: 3; /* address takes more space */
+}
+
+.form-row-1 .form-group.pincode {
+  flex: 1; /* pincode smaller */
 }
 
 label {
@@ -147,8 +159,6 @@ input:hover {
   color: #e74c3c;
   font-size: 14px;
   margin-top: 0.2em;
-  margin-bottom: 0.2em;
-
   transform: translateY(-5px);
   transition: all 0.3s ease;
 }
@@ -246,6 +256,7 @@ h1 {
   display: flex;
   gap: 0;
   flex-direction: row;
+  margin-bottom: 0.5em;
 }
 
 .dropdown {
@@ -286,7 +297,7 @@ h1 {
 
 .search-input:focus {
   border-color: #3b82f6;
-  box-shadow: 0 0 0 1px #3b82f6;
+  box-shadow: 0 0 0 1x #3b82f6;
 }
 
 .search-icon {
@@ -298,10 +309,47 @@ h1 {
   height: 16px;
   color: #6b7280;
 }
+/* Chrome, Edge, Safari */
+.country-list::-webkit-scrollbar {
+  width: 6px; /* scrollbar thickness */
+}
+
+.country-list::-webkit-scrollbar-track {
+  background: #f3f4f6; /* light gray track */
+  border-radius: 3px;
+}
+
+.country-list::-webkit-scrollbar-thumb {
+  background: #9ca3af; /* darker thumb */
+  border-radius: 3px;
+}
+
+.country-list::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Firefox */
+.country-list {
+  scrollbar-width: thin; /* auto | thin | none */
+  scrollbar-color: #9ca3af #f3f4f6; /* thumb | track */
+}
 
 .country-list {
+  position: absolute;
+  top: 100%; /* right below the input */
+  left: 0;
+  width: 100%;
   max-height: 220px;
   overflow-y: auto;
+  background: #fff; /* dropdown should have its own background */
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  z-index: 1000; /* this is the magic ticket */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.country-list.active {
+  display: block;
 }
 
 .country-option {
@@ -404,6 +452,7 @@ h1 {
   text-align: left;
   position: relative;
   color: #374151;
+  cursor: not-allowed;
 }
 
 .country-selected-1:hover {
@@ -436,37 +485,6 @@ h1 {
   pointer-events: none;
 }
 
-.country-selected-1.active .dropdown-arrow {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.country-dropdown-1 {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  max-height: 12rem;
-  overflow-y: auto;
-  margin-top: 0.25rem;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-0.5rem);
-  transition: all 0.2s ease;
-  display: none;
-}
-
-.country-dropdown-1.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  display: block;
-}
-
 .country-option-1 {
   padding: 0.75rem 1rem;
   cursor: pointer;
@@ -488,9 +506,4 @@ h1 {
   background: #eff6ff;
   color: #3b82f6;
   font-weight: 500;
-}
-
-.country-selector-container-1 {
-  position: relative;
-  flex: 1;
 }
