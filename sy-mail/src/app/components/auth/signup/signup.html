@@ -261,10 +261,33 @@ India "
           } }
         </div>
       </div>
-
-      <button type="submit" class="submit-btn">Submit</button>
+      <div class="button-row">
+        <button (click)="prevStep()" class="submit-btn">Back</button>
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
     </form>
 
+    }@else if(currStep==3) {
+    <div class="redirect-container">
+      <div class="success-icon"></div>
+
+      <h1 class="redirect-h">Account Created Successfully!</h1>
+
+      <p class="message">Your account will be live shortly</p>
+
+      <p class="redirect-message">
+        Redirecting you to login page, if you haven't been redirected
+        automatically, click on this link!
+      </p>
+
+      <a href="#" class="login-link">Go to Login Page</a>
+
+      <div class="loading-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
     }
   </div>
 </div>

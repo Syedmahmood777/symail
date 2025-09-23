@@ -507,3 +507,174 @@ h1 {
   color: #3b82f6;
   font-weight: 500;
 }
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.redirect-container {
+  padding: 20px 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  animation: checkmark 0.6s ease-in-out 0.3s both;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-icon::after {
+  content: "✓";
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.redirect-h {
+  position: relative;
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 40px;
+  height: fit-content;
+  background: linear-gradient(#75302b, #923b2e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeIn 0.8s ease-out 0.2s both;
+  line-height: initial;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message {
+  color: #5a6c7d;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+.redirect-message {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  animation: fadeIn 0.8s ease-out 0.6s both;
+}
+
+.login-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #d93025, #dc452e);
+  color: white;
+  text-decoration: none;
+  padding: 15px 40px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.8s ease-out 0.8s both;
+}
+
+.login-link:hover {
+  transform: translateY(-2px);
+  box-shadow: #ffb6b1;
+  background: linear-gradient(190deg, #ff9790, #ee4337);
+}
+
+.login-link:active {
+  transform: translateY(0);
+}
+
+.loading-dots {
+  margin-top: 30px;
+  animation: fadeIn 0.8s ease-out 1s both;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #ff9790;
+  border-radius: 50%;
+  margin: 0 3px;
+  animation: loading 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes loading {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 40px 30px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .message {
+    font-size: 1rem;
+  }
+}

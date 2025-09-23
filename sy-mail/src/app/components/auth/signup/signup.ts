@@ -34,7 +34,7 @@ export class Signup {
   @ViewChild('searchInput') searchInputRef!: ElementRef;
   @ViewChild('phoneInput') phoneInputRef!: ElementRef;
 
-  currStep = 2;
+  currStep = 3;
 
   form = new FormGroup(
     {
@@ -76,8 +76,7 @@ export class Signup {
   selectedCountry = this.countries.find((c) => c.code === 'IN');
 
   form2 = new FormGroup({
-    pNo: new FormControl('', Validators.required),
-    phone: new FormControl('', [
+    pNo: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
       Validators.maxLength(10),
@@ -145,12 +144,15 @@ export class Signup {
     if (this.form.invalid) {
       this.markAlltouched(this.form);
       return;
+    } else {
+      this.nextStep();
     }
   }
   onSubmit2() {
     if (this.form2.invalid) {
       this.markAlltouched(this.form2);
-      return;
+    } else {
+      this.nextStep();
     }
   }
 
