@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="container">
+  <div class="form-container">
+    <div class="icon-container" style="margin-bottom: 2em">
+      <img src="assets/icon/sy_final.svg" height="45%" />
+    </div>
+
+    <h1>Login</h1>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          placeholder="jim_jones221@symail.co"
+        />
+        @if(form.get('email')?.errors?.['pattern'] &&
+        form.get('email')?.touched){ @if(form.get('email')?.errors?.['pattern']
+        && form.get('email')?.touched){
+        <div class="error-msg">
+          *Email can use letters, numbers, dots (.), underscores (_), percent
+          (%), plus (+), hyphens (-) and must end with
+          <strong> @symail.co </strong>
+        </div>
+        } }@else if(form.get('email')?.touched && form.get('email')?.invalid){
+        <div class="error-msg">*Email is required</div>
+
+        }
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          formControlName="pass"
+          placeholder="************"
+        />
+
+        @if(form.get('pass')?.touched && form.get('pass')?.invalid){
+        <div class="error-msg">*Password is required</div>
+
+        }
+      </div>
+    </form>
+  </div>
+</div>
