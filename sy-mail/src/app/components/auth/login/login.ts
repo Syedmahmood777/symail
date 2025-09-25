@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -24,4 +24,15 @@ export class Login {
       Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,}$/),
     ]),
   });
+  private markAlltouched(form: FormGroup) {
+    Object.values(form.controls).forEach((control) => {
+      control.markAsTouched();
+    });
+  }
+  onSubmit() {
+    if (this.form.invalid) {
+      this.markAlltouched(this.form);
+      return;
+    }
+  }
 }
