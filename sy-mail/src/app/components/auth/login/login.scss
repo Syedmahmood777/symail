@@ -153,13 +153,10 @@ input:focus {
   text-decoration: underline;
 }
 .error-message {
-  background: #fee;
   color: #c33;
   padding: 12px;
   border-radius: 8px;
   font-size: 0.9rem;
-  margin-bottom: 20px;
-  display: none;
 }
 
 @media (max-width: 480px) {
@@ -170,4 +167,12 @@ input:focus {
   .logo h1 {
     font-size: 2rem;
   }
+}
+
+.error-msg {
+  color: #c33;
+  font-size: 12px;
+  padding-top: 0.5em;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }

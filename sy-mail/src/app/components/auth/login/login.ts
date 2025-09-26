@@ -14,6 +14,7 @@ import {
   styleUrl: './login.scss',
 })
 export class Login {
+  showError = false;
   form = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -33,6 +34,7 @@ export class Login {
     if (this.form.invalid) {
       this.markAlltouched(this.form);
       return;
+    } else {
     }
   }
 }
