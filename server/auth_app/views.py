@@ -5,6 +5,10 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 @csrf_exempt
+def test(request):    
+    return JsonResponse({'message': list(Auth.objects.values())
+})
+@csrf_exempt
 def signup(request):
      if request.method == 'POST':
 
