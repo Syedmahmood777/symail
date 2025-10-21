@@ -6,8 +6,7 @@ import json
 
 @csrf_exempt
 def test(request):    
-    return JsonResponse({'message': list(Auth.objects.values())
-})
+    return JsonResponse({'message': list(Auth.objects.values()),'message2':list(Info.objects.values())})
 @csrf_exempt
 def signup(request):
      if request.method == 'POST':
@@ -19,20 +18,19 @@ def signup(request):
         lname = data.get('lname')
         country = data.get('country')
         city = data.get('city')
-        phone = data.get('phone')
+        phone_number = data.get('phone', '').replace('+','').replace('-','')
+        phone = int(phone_number)
+
         address = data.get('address')
         pin=data.get('pin')
         date_joined=timezone.now()
 
-        
-        
-        
         try:
             Auth.objects.create(email=email, password=password,date_joined=date_joined)
             Info.objects.create(email=email, fname=fname, lname=lname, country=country, city=city, phone=phone, address=address,pin=pin,date_joined=date_joined)
             return JsonResponse({'message': 'User created successfully'},status=201)
         except Exception as e:
-            return JsonResponse({'error': e}, status=500) 
+            return JsonResponse({'error': str(e)},status=500) 
         
      else:
             return JsonResponse({'error': 'Invalid request method'}, status=400)
