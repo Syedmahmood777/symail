@@ -8,14 +8,11 @@ import { tap, shareReplay, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  // constructor(private http: HttpClient) {}
-  // login(email: string, password: string) {
-  //   return this.http.post<User>('/api/login', { email, password }).pipe(
-  //     tap((res) => this.setSession(res)), // side effect
-  //     shareReplay(), // share last value
-  //     map((user) => user.email) // transform result (optional)
-  //   );
-  // }
+  constructor(private http: HttpClient) {}
+  login(email: string, password: string) {
+    return this.http.post<User>('/auth/login/', { email, password })
+    .shareReplay()
+  }
   // private setSession(authResult) {
   //   const expiresAt = moment().add(authResult.expiresIn, 'second');
   //   localStorage.setItem('id_token', authResult.idToken);

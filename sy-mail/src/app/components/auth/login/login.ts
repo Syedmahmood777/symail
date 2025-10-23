@@ -23,7 +23,6 @@ export class Login {
     ]),
     pass: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,}$/),
     ]),
   });
   private markAlltouched(form: FormGroup) {
@@ -36,6 +35,9 @@ export class Login {
       this.markAlltouched(this.form);
       return;
     } else {
+
+
+
     }
   }
 }
