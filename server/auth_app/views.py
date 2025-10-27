@@ -45,7 +45,7 @@ def login(request):
         try:
             user = Auth.objects.get(email=email)
             if user.password == password:
-                return JsonResponse({'message': 'Login successful'})
+                return JsonResponse({'message': 'Login Success'}, status =200)
             else:
                 return JsonResponse({'error': 'Wrong password'}, status=401)
         except Auth.DoesNotExist:
