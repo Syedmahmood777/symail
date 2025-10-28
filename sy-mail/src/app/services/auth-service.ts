@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User} from '../db_models/user_login';
 import {response} from '../db_models/response';
 import * as moment from 'moment';
 import { tap, shareReplay, map } from 'rxjs/operators';
@@ -19,6 +18,11 @@ export class AuthService {
 
     return this.cred$;
   }
+signup(fname:string,lname:string,country:string,city:string,phone:number,pin:string,address:string, email: string, password: string,dob:string) {
+      return this.http.post<response>('http://127.0.0.1:8000/auth/signup/', {fname,lname,country,city,phone,pin,address, email, password,dob })
+    }
+
+
   // private setSession(authResult) {
   //   const expiresAt = moment().add(authResult.expiresIn, 'second');
   //   localStorage.setItem('id_token', authResult.idToken);

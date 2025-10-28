@@ -17,6 +17,8 @@ import {
   startWith,
 } from 'rxjs/operators';
 import { rCountries } from '../../../../assets/countries';
+import {User} from '../../../db_models/user';
+import { AuthService } from '../../../services/auth-service';
 
 interface Country {
   code: string;
@@ -33,23 +35,24 @@ interface Country {
 export class Signup {
   @ViewChild('searchInput') searchInputRef!: ElementRef;
   @ViewChild('phoneInput') phoneInputRef!: ElementRef;
+  constructor(private authServ: AuthService) { }
 
-  currStep = 3;
+  currStep = 1;
 
   form = new FormGroup(
     {
-      fName: new FormControl('', Validators.required),
-      lName: new FormControl('', Validators.required),
-      email: new FormControl('', [
+      fName: new FormControl<string>('', Validators.required),
+      lName: new FormControl<string>('', Validators.required),
+      email: new FormControl<string>('', [
         Validators.required,
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@symail\.co$/),
       ]),
-      pass: new FormControl('', [
+      password: new FormControl<string>('', [
         Validators.required,
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,}$/),
       ]),
-      rpass: new FormControl('', [Validators.required]),
-      dob: new FormControl('dd/mm/yy', [
+      rpass: new FormControl<string>('', [Validators.required]),
+      dob: new FormControl<string>('dd/mm/yy', [
         Validators.required,
         this.dobValidator,
       ]),
@@ -76,15 +79,15 @@ export class Signup {
   selectedCountry = this.countries.find((c) => c.code === 'IN');
 
   form2 = new FormGroup({
-    pNo: new FormControl('', [
+    phone: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(10),
       Validators.maxLength(10),
     ]),
-    country: new FormControl(this.selectedCountry?.name),
-    city: new FormControl('', Validators.required),
-    address: new FormControl('', Validators.required),
-    pin: new FormControl('', [
+    country: new FormControl<string>(this.selectedCountry?.name??""),
+    city: new FormControl<string>('', Validators.required),
+    address: new FormControl<string>('', Validators.required),
+    pin: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(6),
       Validators.maxLength(6),
@@ -148,16 +151,39 @@ export class Signup {
       this.nextStep();
     }
   }
-  onSubmit2() {
+  async onSubmit2() {
     if (this.form2.invalid) {
       this.markAlltouched(this.form2);
     } else {
-      this.nextStep();
+  const email=this.form.get('email')!.value??"";
+  const password = this.form.get('password')!.value??"";
+  const fname = this.form.get('fName')!.value??"";
+  const lname = this.form.get('lName')!.value??""
+  const country = this.form2.get('country')!.value??""
+  const city = this.form2.get('city')!.value??""
+  const dialCode=this.selectedCountry?.dialCode.replace('+','')?? "91"
+  const phone = Number(dialCode+this.form2.get('phone')?.value)
+  const pin = this.form2.get('pin')!.value??""
+  const address = this.form2.get('address')!.value??""
+  const dob= this.form.get('dob')!.value??""
+
+  console.log(dob,email,password ,fname ,lname ,country ,city ,phone ,pin ,address)
+
+
+ try {
+    const res = await this.authServ.signup(fname, lname, country, city, phone, pin, address, email, password, dob)
+
+    console.log('Signup successful', res);
+    this.nextStep();
+  } catch (err) {
+    console.error('Signup failed', err);
+  }
+
     }
   }
 
   passwordValidator(group: AbstractControl): ValidationErrors | null {
-    const pass = group.get('pass')?.value;
+    const pass = group.get('password')?.value;
     const rpass = group.get('rpass')?.value;
     return pass === rpass ? null : { notMatched: true };
   }

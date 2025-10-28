@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from datetime import datetime
 from django.utils import timezone
 from .models import Auth,Info
 from django.views.decorators.csrf import csrf_exempt
@@ -13,12 +14,16 @@ def signup(request):
 
         data = json.loads(request.body)
         email = data.get('email')
+        
+        dob_str = data.get('dob')  
+        dob = datetime.strptime(dob_str, '%Y-%m-%d')  # Convert to naive datetime
+
         password = data.get('password')
         fname = data.get('fname')
         lname = data.get('lname')
         country = data.get('country')
         city = data.get('city')
-        phone_number = data.get('phone', '').replace('+','').replace('-','')
+        phone_number = data.get('phone', '')
         phone = int(phone_number)
 
         address = data.get('address')
@@ -27,7 +32,7 @@ def signup(request):
 
         try:
             Auth.objects.create(email=email, password=password,date_joined=date_joined)
-            Info.objects.create(email=email, fname=fname, lname=lname, country=country, city=city, phone=phone, address=address,pin=pin,date_joined=date_joined)
+            Info.objects.create(email=email, fname=fname, lname=lname, country=country, city=city, phone=phone, address=address,pin=pin,date_joined=date_joined,dob=dob)
             return JsonResponse({'message': 'User created successfully'},status=201)
         except Exception as e:
             return JsonResponse({'error': str(e)},status=500) 

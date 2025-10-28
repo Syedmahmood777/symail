@@ -23,7 +23,7 @@ class Info(models.Model):
     address = models.TextField()      
     pin = models.CharField(max_length=10);                       
     date_joined = models.DateTimeField()              
-
+    dob= models.CharField(max_length=30)    
     class Meta:
         managed = False                              
         db_table = 'info'       

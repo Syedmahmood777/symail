@@ -80,9 +80,9 @@
           type="password"
           id="password"
           name="password"
-          formControlName="pass"
+          formControlName="password"
         />
-        @if (form.get('pass')?.invalid && form.get('pass')?.touched) {
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
         <div class="error-msg">*Password is required</div>
         }
       </div>
@@ -99,7 +99,7 @@
         }
       </div>
 
-      @if(form.get('pass')?.errors?.['pattern'] && form.get('pass')?.touched){
+      @if(form.get('password')?.errors?.['pattern'] && form.get('password')?.touched){
       <div class="p-guidelines" id="pConstraints">
         Password must contain at least:
         <ul>
@@ -177,7 +177,7 @@
           id="pNum"
           name="pNum"
           placeholder="9381913352"
-          formControlName="pNo"
+          formControlName="phone"
           class="pInput"
           maxlength="10"
           inputmode="numeric"
@@ -186,8 +186,8 @@
         />
       </div>
 
-      @if(form2.get('pNo')?.invalid && (form2.get('pNo')?.touched ||
-      form2.get('pNo')?.dirty)) { @if(form2.get('pNo')?.invalid) {
+      @if(form2.get('phone')?.invalid && (form2.get('phone')?.touched ||
+      form2.get('phone')?.dirty)) { @if(form2.get('phone')?.invalid) {
       <div class="error-msg" style="margin: 0.1em">*Required</div>
       } }
 
@@ -230,9 +230,9 @@
             type="text"
             id="address"
             name="address"
-            placeholder="Flat No. 203, Sunrise Apartments  
-Road No. 10, Banjara Hills  
-Hyderabad, Telangana, 
+            placeholder="Flat No. 203, Sunrise Apartments
+Road No. 10, Banjara Hills
+Hyderabad, Telangana,
 India "
             formControlName="address"
           />
