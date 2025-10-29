@@ -57,6 +57,16 @@ def login(request):
             return JsonResponse({'error': 'User not found'}, status=404) 
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)   
+@csrf_exempt
+def valid(request):
+    email=request.GET.get("email")
+    try:
+        exists =Auth.objects.filter(email=email).exists()
+        return JsonResponse({'exists':exists}, status=200)
+    except Exception as e:
+        return JsonResponse({'error':str(e)},status=500)
+
+
 
 def forgot(request):
     return JsonResponse({'message': list(Auth.objects.all().values())})

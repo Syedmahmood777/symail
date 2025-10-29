@@ -21,7 +21,14 @@ export class AuthService {
 signup(fname:string,lname:string,country:string,city:string,phone:number,pin:string,address:string, email: string, password: string,dob:string) {
       return this.http.post<response>('http://127.0.0.1:8000/auth/signup/', {fname,lname,country,city,phone,pin,address, email, password,dob })
     }
+signVal(email:string){
 
+  return this.http.get<{exists:boolean}>('http://127.0.0.1:8000/auth/valid/',{
+    params:{email}
+
+  });
+
+}
 
   // private setSession(authResult) {
   //   const expiresAt = moment().add(authResult.expiresIn, 'second');

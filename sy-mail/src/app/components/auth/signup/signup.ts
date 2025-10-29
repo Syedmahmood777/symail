@@ -144,12 +144,17 @@ export class Signup {
     });
   }
 
-  onSubmit() {
+ async onSubmit() {
     if (this.form.invalid) {
       this.markAlltouched(this.form);
       return;
     } else {
+      const email=this.form.get("email")!.value?? ""
+      if(await this.validEmail(email)){
+        return;
+      }
       this.nextStep();
+      this.cd.detectChanges();
     }
   }
   async onSubmit2() {
@@ -183,6 +188,24 @@ export class Signup {
 
     }
   }
+
+
+
+  async validEmail(email:string){
+  try{
+
+    const res=await lastValueFrom(this.authServ.signVal(email))
+    console.log(res);
+    return res.exists;
+  }
+
+  catch(err){
+
+    return true;
+  }
+
+  }
+
 
   passwordValidator(group: AbstractControl): ValidationErrors | null {
     const pass = group.get('password')?.value;
@@ -233,4 +256,9 @@ export class Signup {
       this.currStep--;
     }
   }
+
+
+
+
+
 }
