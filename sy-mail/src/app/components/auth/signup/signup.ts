@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild, HostListener } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -19,7 +19,8 @@ import {
 import { rCountries } from '../../../../assets/countries';
 import {User} from '../../../db_models/user';
 import { AuthService } from '../../../services/auth-service';
-
+import { RouterLink } from '@angular/router';
+import {lastValueFrom} from 'rxjs';
 interface Country {
   code: string;
   name: string;
@@ -28,14 +29,14 @@ interface Country {
 }
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, AsyncPipe],
+  imports: [ReactiveFormsModule, AsyncPipe, RouterLink],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })
 export class Signup {
   @ViewChild('searchInput') searchInputRef!: ElementRef;
   @ViewChild('phoneInput') phoneInputRef!: ElementRef;
-  constructor(private authServ: AuthService) { }
+  constructor(private authServ: AuthService,private cd: ChangeDetectorRef) { }
 
   currStep = 1;
 
@@ -171,10 +172,11 @@ export class Signup {
 
 
  try {
-    const res = await this.authServ.signup(fname, lname, country, city, phone, pin, address, email, password, dob)
+    const res = await lastValueFrom(this.authServ.signup(fname, lname, country, city, phone, pin, address, email, password, dob));
 
     console.log('Signup successful', res);
     this.nextStep();
+    this.cd.detectChanges();
   } catch (err) {
     console.error('Signup failed', err);
   }
