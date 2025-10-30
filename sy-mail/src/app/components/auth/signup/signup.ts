@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild, HostListener } from '@angular/core';
+import {
+  NgZone,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  ViewChild,
+  HostListener,
+} from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -17,10 +24,11 @@ import {
   startWith,
 } from 'rxjs/operators';
 import { rCountries } from '../../../../assets/countries';
-import {User} from '../../../db_models/user';
+import { User } from '../../../db_models/user';
 import { AuthService } from '../../../services/auth-service';
 import { RouterLink } from '@angular/router';
-import {lastValueFrom} from 'rxjs';
+import { lastValueFrom } from 'rxjs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 interface Country {
   code: string;
   name: string;
@@ -29,15 +37,20 @@ interface Country {
 }
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, AsyncPipe, RouterLink],
+  imports: [ReactiveFormsModule, AsyncPipe, RouterLink, MatProgressBarModule],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })
 export class Signup {
   @ViewChild('searchInput') searchInputRef!: ElementRef;
   @ViewChild('phoneInput') phoneInputRef!: ElementRef;
-  constructor(private authServ: AuthService,private cd: ChangeDetectorRef) { }
+  constructor(
+    private authServ: AuthService,
+    private cd: ChangeDetectorRef,
+    private _ngZone: NgZone,
+  ) { }
 
+  loading = false;
   currStep = 1;
 
   form = new FormGroup(
@@ -58,13 +71,13 @@ export class Signup {
         this.dobValidator,
       ]),
     },
-    { validators: this.passwordValidator }
+    { validators: this.passwordValidator },
   );
   getFlagEmoji(countryCode: string): string {
     return countryCode
       .toUpperCase()
       .replace(/./g, (char) =>
-        String.fromCodePoint(127397 + char.charCodeAt(0))
+        String.fromCodePoint(127397 + char.charCodeAt(0)),
       );
   }
 
@@ -85,7 +98,7 @@ export class Signup {
       Validators.minLength(10),
       Validators.maxLength(10),
     ]),
-    country: new FormControl<string>(this.selectedCountry?.name??""),
+    country: new FormControl<string>(this.selectedCountry?.name ?? ''),
     city: new FormControl<string>('', Validators.required),
     address: new FormControl<string>('', Validators.required),
     pin: new FormControl<string>('', [
@@ -106,8 +119,8 @@ export class Signup {
       distinctUntilChanged(),
       map((term) => (term || '').toLowerCase()),
       map((term) =>
-        this.countries.filter((c) => c.name.toLowerCase().startsWith(term))
-      )
+        this.countries.filter((c) => c.name.toLowerCase().startsWith(term)),
+      ),
     );
   }
 
@@ -144,68 +157,97 @@ export class Signup {
     });
   }
 
- async onSubmit() {
+  async onSubmit() {
     if (this.form.invalid) {
       this.markAlltouched(this.form);
       return;
     } else {
-      const email=this.form.get("email")!.value?? ""
-      if(await this.validEmail(email)){
-        return;
-      }
-      this.nextStep();
+
+      this.loading = true;
       this.cd.detectChanges();
+
+       setTimeout(async () => {
+    try {
+      const email = this.form.get("email")!.value ?? "";
+
+      if (await this.validEmail(email)) {
+        console.log("wp");
+      } else {
+        await this.nextStep();
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      this.loading = false;
+      this.cd.detectChanges();
+    }
+  }, 0);
+
     }
   }
   async onSubmit2() {
     if (this.form2.invalid) {
       this.markAlltouched(this.form2);
     } else {
-  const email=this.form.get('email')!.value??"";
-  const password = this.form.get('password')!.value??"";
-  const fname = this.form.get('fName')!.value??"";
-  const lname = this.form.get('lName')!.value??""
-  const country = this.form2.get('country')!.value??""
-  const city = this.form2.get('city')!.value??""
-  const dialCode=this.selectedCountry?.dialCode.replace('+','')?? "91"
-  const phone = Number(dialCode+this.form2.get('phone')?.value)
-  const pin = this.form2.get('pin')!.value??""
-  const address = this.form2.get('address')!.value??""
-  const dob= this.form.get('dob')!.value??""
+      const email = this.form.get('email')!.value ?? '';
+      const password = this.form.get('password')!.value ?? '';
+      const fname = this.form.get('fName')!.value ?? '';
+      const lname = this.form.get('lName')!.value ?? '';
+      const country = this.form2.get('country')!.value ?? '';
+      const city = this.form2.get('city')!.value ?? '';
+      const dialCode = this.selectedCountry?.dialCode.replace('+', '') ?? '91';
+      const phone = Number(dialCode + this.form2.get('phone')?.value);
+      const pin = this.form2.get('pin')!.value ?? '';
+      const address = this.form2.get('address')!.value ?? '';
+      const dob = this.form.get('dob')!.value ?? '';
 
-  console.log(dob,email,password ,fname ,lname ,country ,city ,phone ,pin ,address)
+      console.log(
+        dob,
+        email,
+        password,
+        fname,
+        lname,
+        country,
+        city,
+        phone,
+        pin,
+        address,
+      );
 
+      try {
+        const res = await lastValueFrom(
+          this.authServ.signup(
+            fname,
+            lname,
+            country,
+            city,
+            phone,
+            pin,
+            address,
+            email,
+            password,
+            dob,
+          ),
+        );
 
- try {
-    const res = await lastValueFrom(this.authServ.signup(fname, lname, country, city, phone, pin, address, email, password, dob));
-
-    console.log('Signup successful', res);
-    this.nextStep();
-    this.cd.detectChanges();
-  } catch (err) {
-    console.error('Signup failed', err);
-  }
-
+        console.log('Signup successful', res);
+        this.nextStep();
+        this.cd.detectChanges();
+      } catch (err) {
+        console.error('Signup failed', err);
+      }
     }
   }
 
-
-
-  async validEmail(email:string){
-  try{
-
-    const res=await lastValueFrom(this.authServ.signVal(email))
-    console.log(res);
-    return res.exists;
+  async validEmail(email: string) {
+    try {
+      const res = await lastValueFrom(this.authServ.signVal(email));
+      console.log(res);
+      return res.exists;
+    } catch (err) {
+      return true;
+    }
   }
-
-  catch(err){
-
-    return true;
-  }
-
-  }
-
 
   passwordValidator(group: AbstractControl): ValidationErrors | null {
     const pass = group.get('password')?.value;
@@ -256,9 +298,4 @@ export class Signup {
       this.currStep--;
     }
   }
-
-
-
-
-
 }

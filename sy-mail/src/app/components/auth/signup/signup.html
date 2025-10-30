@@ -1,3 +1,6 @@
+      @if(loading){
+      <mat-progress-bar  class="pbar" mode="indeterminate" color="accent"></mat-progress-bar>
+      }
 <div class="container">
   <div class="form-container">
     <div class="icon-container" style="margin-bottom: 2em">
@@ -67,6 +70,7 @@
           type="date"
           id="dateOfBirth"
           name="dateOfBirth"
+          max="9999-12-31"
           formControlName="dob"
         />
         @if (form.get('dob')?.invalid && form.get('dob')?.touched) {
@@ -111,7 +115,6 @@
         </ul>
       </div>
       }
-
       <button type="submit" class="submit-btn">Create Account</button>
     </form>
     }@else if(currStep==2){
