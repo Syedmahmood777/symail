@@ -11,18 +11,19 @@ import { AuthService } from '../../../services/auth-service';
 import { RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-
+import { signal} from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {finalize} from 'rxjs/operators';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, MatProgressBarModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
   constructor(private authServ: AuthService, private router: Router) {}
-
-  showError = false;
+  loading=signal(false);
+  showError = signal(false);
   form = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -40,15 +41,22 @@ export class Login {
       this.markAlltouched(this.form);
       return;
     }
+
+    this.loading.set(true);
     const email = this.form.get('email')!.value ?? '';
     const pass = this.form.get('pass')!.value ?? '';
-    this.authServ.login(email, pass).subscribe({
-      next: (res) =>{ console.log('Login successfl', res)
+    this.authServ.login(email, pass).pipe(
+  finalize(() => this.loading.set(false))
+).subscribe({
+      next: (res) =>{
         this.router.navigate(['/'])
+      },
+      error: (err) => {
 
+      this.showError.set(true);
 
       },
-      error: (err) => console.error('Login didnt hhaappe', err),
     });
+    this.loading.set(false);
   }
 }
