@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewChild,
   HostListener,
+  signal
 } from '@angular/core';
 import {
   FormGroup,
@@ -50,7 +51,7 @@ export class Signup {
     private _ngZone: NgZone,
   ) { }
 
-  loading = false;
+  loading = signal(false);
   currStep = 1;
 
   form = new FormGroup(
@@ -163,10 +164,9 @@ export class Signup {
       return;
     } else {
 
-      this.loading = true;
+      this.loading.set(true);
       this.cd.detectChanges();
 
-       setTimeout(async () => {
     try {
       const email = this.form.get("email")!.value ?? "";
 
@@ -178,10 +178,9 @@ export class Signup {
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      this.loading = false;
+      this.loading.set(false) ;
       this.cd.detectChanges();
     }
-  }, 0);
 
     }
   }
