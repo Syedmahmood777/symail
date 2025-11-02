@@ -1,11 +1,15 @@
 <div class="main-container">
+
+      @if(loading()){
+      <mat-progress-bar  class="pbar" mode="indeterminate" color="accent"></mat-progress-bar>
+      }
   <div class="login-container">
     <div class="logo">
       <img src="assets/icon/sy_final.svg" height="45%" />
       <p>Your secure email solution</p>
     </div>
 
-    @if (showError) {
+    @if (showError()) {
       <div class="error-message" id="errorMessage">
         Invalid email or password. Please try again.
       </div>

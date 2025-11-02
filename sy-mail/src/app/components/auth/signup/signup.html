@@ -59,8 +59,9 @@
           <strong> @symail.co </strong>
         </div>
         } }@else if(form.get('email')?.touched && form.get('email')?.invalid){
-        <div class="error-msg">*Email is required</div>
-
+        <div class="error-msg">*Email is required</div>}
+        @else if(invalidMail()){
+        <div class="error-msg">*Email is already taken</div>
         }
       </div>
 

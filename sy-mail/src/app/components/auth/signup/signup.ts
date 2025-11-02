@@ -52,6 +52,7 @@ export class Signup {
   ) { }
 
   loading = signal(false);
+  invalidMail= signal(false);
   currStep = 1;
 
   form = new FormGroup(
@@ -171,7 +172,7 @@ export class Signup {
       const email = this.form.get("email")!.value ?? "";
 
       if (await this.validEmail(email)) {
-        console.log("wp");
+        this.invalidMail.set(true);
       } else {
         await this.nextStep();
       }
@@ -199,19 +200,7 @@ export class Signup {
       const pin = this.form2.get('pin')!.value ?? '';
       const address = this.form2.get('address')!.value ?? '';
       const dob = this.form.get('dob')!.value ?? '';
-
-      console.log(
-        dob,
-        email,
-        password,
-        fname,
-        lname,
-        country,
-        city,
-        phone,
-        pin,
-        address,
-      );
+      this.loading.set(true);
 
       try {
         const res = await lastValueFrom(
@@ -229,11 +218,14 @@ export class Signup {
           ),
         );
 
-        console.log('Signup successful', res);
-        this.nextStep();
-        this.cd.detectChanges();
       } catch (err) {
         console.error('Signup failed', err);
+      }
+      finally{
+        this.loading.set(false);
+        this.nextStep();
+        this.cd.detectChanges();
+
       }
     }
   }
@@ -241,7 +233,6 @@ export class Signup {
   async validEmail(email: string) {
     try {
       const res = await lastValueFrom(this.authServ.signVal(email));
-      console.log(res);
       return res.exists;
     } catch (err) {
       return true;
